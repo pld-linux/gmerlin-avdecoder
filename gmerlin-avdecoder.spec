@@ -22,7 +22,7 @@ BuildRequires:	gavl-devel
 #BuildRequires:	gmerlin-devel
 BuildRequires:	libcdio-devel
 BuildRequires:	libdts-devel
-BuildRequires:	libdvdread-devel
+#BuildRequires:	libdvdread-devel >= 0.9.5
 BuildRequires:	libmad-devel
 BuildRequires:	libmpcdec-devel
 BuildRequires:	libmpeg2-devel
@@ -30,6 +30,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	libtheora-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool
+BuildRequires:	libvdpau-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	mjpegtools-devel
 BuildRequires:	openjpeg-devel
@@ -94,13 +95,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} -r $RPM_BUILD_ROOT{%{_libdir}/*.la,%{_prefix}/share/doc/%{name}}
 
+%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README
 %attr(755,root,root) %ghost %{_libdir}/libgmerlin_avdec.so.?
@@ -109,6 +112,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %{?with_apidocs:%doc doc/apiref}
+%attr(755,root,root) %{_bindir}/bgavd*
 %attr(755,root,root) %{_libdir}/libgmerlin_avdec.so
 %{_includedir}/gmerlin
 %{_pkgconfigdir}/gmerlin_avdec.pc
