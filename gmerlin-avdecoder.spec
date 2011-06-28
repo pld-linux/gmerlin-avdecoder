@@ -36,7 +36,7 @@ BuildRequires:	mjpegtools-devel
 BuildRequires:	openjpeg-devel
 BuildRequires:	pkgconfig >= 0.9.0
 BuildRequires:	samba-devel
-#BuildRequires:	schroedinger-devel
+BuildRequires:	schroedinger-devel
 BuildRequires:	speex-devel
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
