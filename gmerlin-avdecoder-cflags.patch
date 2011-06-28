@@ -1,0 +1,11 @@
+--- gmerlin-avdecoder-1.1.0/configure.ac.orig	2011-01-05 20:42:29.000000000 +0100
++++ gmerlin-avdecoder-1.1.0/configure.ac	2011-06-29 00:10:57.000000000 +0200
+@@ -514,7 +514,7 @@ dnl
+ dnl Build optimization flags
+ dnl
+ 
+-LQT_OPT_CFLAGS($host_cpu, ["-O3 -funroll-all-loops -ffast-math"])
++LQT_OPT_CFLAGS($host_cpu, [""])
+ AC_SUBST(OPT_CFLAGS)
+ 
+ dnl
