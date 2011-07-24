@@ -4,7 +4,7 @@
 Summary:	Multiformat decoding library
 Name:		gmerlin-avdecoder
 Version:	1.1.0
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Libraries
 Source0:	http://dl.sourceforge.net/gmerlin/%{name}-%{version}.tar.gz
