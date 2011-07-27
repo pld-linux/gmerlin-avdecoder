@@ -1,0 +1,11 @@
+--- gmerlin-avdecoder-1.1.0/configure.ac.orig	2011-07-27 19:21:58.412106334 +0200
++++ gmerlin-avdecoder-1.1.0/configure.ac	2011-07-27 19:38:51.748806931 +0200
+@@ -152,7 +152,7 @@
+ AC_SUBST(GAVL_REQUIRED)
+ 
+ ICONV_LIBS=
+-AC_CHECK_LIB(iconv, libiconv_close, ICONV_LIBS="-liconv")
++AC_CHECK_FUNC(iconv_close, , [AC_CHECK_LIB(iconv, libiconv_close, ICONV_LIBS="-liconv")])
+ AC_SUBST(ICONV_LIBS)
+ 
+ if test "x$os_win32" = "xyes"; then
