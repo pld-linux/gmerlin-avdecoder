@@ -1,5 +1,14 @@
 --- gmerlin-avdecoder-1.1.0/configure.ac.orig	2011-07-27 19:21:58.412106334 +0200
 +++ gmerlin-avdecoder-1.1.0/configure.ac	2011-07-27 19:38:51.748806931 +0200
+@@ -89,7 +89,7 @@
+ fi
+ 
+ AC_SUBST(GMERLIN_DEP_LIBS)
+-LDFLAGS="$GMERLIN_DEP_RPATH"
++LDFLAGS="$LDFLAGS $GMERLIN_DEP_RPATH"
+ 
+ 
+ dnl Check for mingw
 @@ -152,7 +152,7 @@
  AC_SUBST(GAVL_REQUIRED)
  

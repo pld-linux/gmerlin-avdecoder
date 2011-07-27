@@ -34,6 +34,7 @@ BuildRequires:	libmpcdec-devel >= 1.1
 BuildRequires:	libmpeg2-devel >= 0.4.0
 BuildRequires:	libogg-devel >= 1.0
 BuildRequires:	libpng-devel >= 1.2.2
+%{?with_smb:BuildRequires:	libsmbclient-devel >= 3.0.0}
 BuildRequires:	libtheora-devel >= 1.0.0
 BuildRequires:	libtiff-devel >= 3.5.0
 BuildRequires:	libtool
@@ -42,13 +43,32 @@ BuildRequires:	libvorbis-devel >= 1.0
 BuildRequires:	mjpegtools-devel >= 1.9.0
 BuildRequires:	openjpeg-devel >= 1.3
 BuildRequires:	pkgconfig >= 1:0.9.0
-%{?with_smb:BuildRequires:	libsmbclient-devel >= 3.0.0}
 BuildRequires:	schroedinger-devel >= 1.0.5
 BuildRequires:	speex-devel >= 1.0.4
 BuildRequires:	xorg-lib-libX11-devel >= 1.0.0
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	zlib-devel
+Requires:	a52-libs >= 0.7.4
+Requires:	faad2-libs >= 2.0
+Requires:	ffmpeg-libs >= 0.7
+Requires:	flac >= 1.1.0
 Requires:	gavl >= 1.2.0
+Requires:	libcdio >= 0.76
+Requires:	libdts >= 0.0.2
+#Requires:	libdvdread >= 0.9.5
+Requires:	libmad >= 0.15.0
+Requires:	libmpcdec >= 1.1
+Requires:	libmpeg2 >= 0.4.0
+Requires:	libogg >= 1.0
+Requires:	libpng >= 1.2.2
+%{?with_smb:Requires:	libsmbclient >= 3.0.0}
+Requires:	libtheora >= 1.0.0
+Requires:	libtiff >= 3.5.0
+Requires:	libvorbis >= 1.0
+Requires:	mjpegtools-libs >= 1.9.0
+Requires:	openjpeg >= 1.3
+Requires:	schroedinger >= 1.0.5
+Requires:	speex >= 1.0.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags	-fomit-frame-pointer -ffast-math
@@ -72,6 +92,31 @@ Summary:	Header files for gmerlin_avdec library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki gmerlin_avdec
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	a52dec-libs-devel >= 0.7.4
+Requires:	faad2-devel >= 2.0
+Requires:	ffmpeg-devel >= 0.7
+Requires:	flac-devel >= 1.1.0
+Requires:	gavl-devel >= 1.2.0
+Requires:	libcdio-devel >= 0.76
+Requires:	libdts-devel >= 0.0.2
+#Requires:	libdvdread-devel >= 0.9.5
+Requires:	libmad-devel >= 0.15.0
+Requires:	libmpcdec-devel >= 1.1
+Requires:	libmpeg2-devel >= 0.4.0
+Requires:	libogg-devel >= 1.0
+Requires:	libpng-devel >= 1.2.2
+%{?with_smb:Requires:	libsmbclient-devel >= 3.0.0}
+Requires:	libtheora-devel >= 1.0.0
+Requires:	libtiff-devel >= 3.5.0
+Requires:	libvdpau-devel
+Requires:	libvorbis-devel >= 1.0
+Requires:	mjpegtools-devel >= 1.9.0
+Requires:	openjpeg-devel >= 1.3
+Requires:	schroedinger-devel >= 1.0.5
+Requires:	speex-devel >= 1.0.4
+Requires:	xorg-lib-libX11-devel >= 1.0.0
+Requires:	xorg-lib-libXext-devel
+Requires:	zlib-devel
 
 %description devel
 Header files for gmerlin_avdec library.
@@ -90,6 +135,19 @@ Static gmerlin_avdec library.
 
 %description static -l pl.UTF-8
 Statyczna biblioteka gmerlin_avdec.
+
+%package -n gmerlin-plugin-avdec
+Summary:	avdec plugins for Gmerlin library
+Summary(pl.UTF-8):	Wtyczki avdec dla biblioteki Gmerlin
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+Requires:	gmerlin >= 1.0.0
+
+%description -n gmerlin-plugin-avdec
+avdec plugins for Gmerlin library.
+
+%description -n gmerlin-plugin-avdec -l pl.UTF-8
+Wtyczki avdec dla biblioteki Gmerlin.
 
 %prep
 %setup -q
@@ -116,8 +174,10 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libgmerlin_avdec.la
-%{__rm} -r %{_prefix}/share/doc/%{name}/apiref
+# .la kept for now - .pc is missing proper {Libs,Requires}.private
+#%{__rm} $RPM_BUILD_ROOT%{_libdir}/libgmerlin_avdec.la
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gmerlin/plugins/*.{la,a}
+%{__rm} -r $RPM_BUILD_ROOT%{_prefix}/share/doc/%{name}/apiref
 
 %find_lang %{name}
 
@@ -139,9 +199,22 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{?with_apidocs:%doc doc/apiref}
 %attr(755,root,root) %{_libdir}/libgmerlin_avdec.so
-%{_includedir}/gmerlin
+%{_libdir}/libgmerlin_avdec.la
+# NOTE: dir shared with gmerlin-devel
+%dir %{_includedir}/gmerlin
+%{_includedir}/gmerlin/avdec.h
+%{_includedir}/gmerlin/bgav_version.h
+%{_includedir}/gmerlin/bgavdefs.h
 %{_pkgconfigdir}/gmerlin_avdec.pc
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgmerlin_avdec.a
+
+%files -n gmerlin-plugin-avdec
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/gmerlin/plugins/i_avdec.so
+# separate packages?
+%attr(755,root,root) %{_libdir}/gmerlin/plugins/i_dvb.so
+#%attr(755,root,root) %{_libdir}/gmerlin/plugins/i_dvd.so
+%attr(755,root,root) %{_libdir}/gmerlin/plugins/i_vcd.so
