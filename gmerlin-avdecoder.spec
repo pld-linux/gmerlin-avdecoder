@@ -7,7 +7,7 @@ Summary:	Multiformat media decoding library
 Summary(pl.UTF-8):	Biblioteka dekodująca wiele formatów multimedialnych
 Name:		gmerlin-avdecoder
 Version:	1.1.0
-Release:	10
+Release:	11
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/gmerlin/%{name}-%{version}.tar.gz
