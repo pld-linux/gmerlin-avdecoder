@@ -6,12 +6,12 @@
 Summary:	Multiformat media decoding library
 Summary(pl.UTF-8):	Biblioteka dekodująca wiele formatów multimedialnych
 Name:		gmerlin-avdecoder
-Version:	1.1.0
-Release:	11
+Version:	1.2.0
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/gmerlin/%{name}-%{version}.tar.gz
-# Source0-md5:	c1ea663e9da631453eec4ac79138b6c5
+# Source0-md5:	37b19266b098d9d05bb05ebef138ffbd
 Patch0:		%{name}-cflags.patch
 Patch1:		%{name}-ffmpeg-0.8.patch
 Patch2:		%{name}-link.patch
@@ -25,7 +25,7 @@ BuildRequires:	ffmpeg-devel >= 0.7
 BuildRequires:	flac-devel >= 1.1.0
 BuildRequires:	gavl-devel >= 1.2.0
 BuildRequires:	gettext-devel
-BuildRequires:	gmerlin-devel >= 1.0.0
+BuildRequires:	gmerlin-devel >= 1.2.0
 BuildRequires:	libcdio-devel >= 0.76
 BuildRequires:	libdts-devel >= 0.0.2
 #BuildRequires:	libdvdread-devel >= 0.9.5
@@ -141,7 +141,7 @@ Summary:	avdec plugins for Gmerlin library
 Summary(pl.UTF-8):	Wtyczki avdec dla biblioteki Gmerlin
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	gmerlin >= 1.0.0
+Requires:	gmerlin >= 1.2.0
 
 %description -n gmerlin-plugin-avdec
 avdec plugins for Gmerlin library.
