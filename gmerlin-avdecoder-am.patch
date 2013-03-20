@@ -1,0 +1,10 @@
+--- gmerlin-avdecoder-1.2.0/configure.ac.orig	2013-03-19 15:33:46.603505967 +0100
++++ gmerlin-avdecoder-1.2.0/configure.ac	2013-03-19 15:39:27.643491580 +0100
+@@ -1,6 +1,6 @@
+ AC_INIT(gmerlin-avdecoder, 1.2.0)
+ AC_CONFIG_SRCDIR([include/avdec.h])
+-AM_CONFIG_HEADER(include/config.h)
++AC_CONFIG_HEADERS(include/config.h)
+ AM_INIT_AUTOMAKE(1.8.5)
+ 
+ 

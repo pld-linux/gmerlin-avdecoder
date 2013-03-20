@@ -1,3 +1,4 @@
+# TODO: shared libgsm?
 #
 # Conditional build:
 %bcond_without	apidocs		# without doc
@@ -15,31 +16,34 @@ Source0:	http://downloads.sourceforge.net/gmerlin/%{name}-%{version}.tar.gz
 Patch0:		%{name}-cflags.patch
 Patch1:		%{name}-ffmpeg-0.8.patch
 Patch2:		%{name}-link.patch
+Patch3:		%{name}-am.patch
 URL:		http://gmerlin.sourceforge.net/avdec_frame.html
 BuildRequires:	a52dec-libs-devel >= 0.7.4
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.8.5
 %{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	faad2-devel >= 2.0
+# avcodec build >= 3412992, avformat build >= 3415808, libpostproc >= 51.0.0, libswscale >= 0.5.0
 BuildRequires:	ffmpeg-devel >= 0.7
-BuildRequires:	flac-devel >= 1.1.0
-BuildRequires:	gavl-devel >= 1.2.0
+BuildRequires:	flac-devel >= 1.2.0
+BuildRequires:	gavl-devel >= 1.4.0
 BuildRequires:	gettext-devel
 BuildRequires:	gmerlin-devel >= 1.2.0
 BuildRequires:	libcdio-devel >= 0.76
 BuildRequires:	libdts-devel >= 0.0.2
-#BuildRequires:	libdvdread-devel >= 0.9.5
+# requires DVDREAD_VERSION >= 905; in case of 4.x series it's 4.2.0-1 (as in Th)
+BuildRequires:	libdvdread-devel >= 0.9.5
 BuildRequires:	libmad-devel >= 0.15.0
 BuildRequires:	libmpcdec-devel >= 1.1
 BuildRequires:	libmpeg2-devel >= 0.4.0
-BuildRequires:	libogg-devel >= 1.0
+BuildRequires:	libogg-devel >= 1:1.1
 BuildRequires:	libpng-devel >= 1.2.2
 %{?with_smb:BuildRequires:	libsmbclient-devel >= 3.0.0}
 BuildRequires:	libtheora-devel >= 1.0.0
 BuildRequires:	libtiff-devel >= 3.5.0
 BuildRequires:	libtool
 BuildRequires:	libvdpau-devel
-BuildRequires:	libvorbis-devel >= 1.0
+BuildRequires:	libvorbis-devel >= 1:1.0
 BuildRequires:	mjpegtools-devel >= 1.9.0
 BuildRequires:	openjpeg-devel >= 1.3
 BuildRequires:	pkgconfig >= 1:0.9.0
@@ -51,20 +55,20 @@ BuildRequires:	zlib-devel
 Requires:	a52dec-libs >= 0.7.4
 Requires:	faad2-libs >= 2.0
 Requires:	ffmpeg-libs >= 0.7
-Requires:	flac >= 1.1.0
-Requires:	gavl >= 1.2.0
+Requires:	flac >= 1.2.0
+Requires:	gavl >= 1.4.0
 Requires:	libcdio >= 0.76
 Requires:	libdts >= 0.0.2
-#Requires:	libdvdread >= 0.9.5
+Requires:	libdvdread >= 0.9.5
 Requires:	libmad >= 0.15.0
 Requires:	libmpcdec >= 1.1
 Requires:	libmpeg2 >= 0.4.0
-Requires:	libogg >= 1.0
+Requires:	libogg >= 1:1.1
 Requires:	libpng >= 1.2.2
 %{?with_smb:Requires:	libsmbclient >= 3.0.0}
 Requires:	libtheora >= 1.0.0
 Requires:	libtiff >= 3.5.0
-Requires:	libvorbis >= 1.0
+Requires:	libvorbis >= 1:1.0
 Requires:	mjpegtools-libs >= 1.9.0
 Requires:	openjpeg >= 1.3
 Requires:	schroedinger >= 1.0.5
@@ -95,21 +99,21 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	a52dec-libs-devel >= 0.7.4
 Requires:	faad2-devel >= 2.0
 Requires:	ffmpeg-devel >= 0.7
-Requires:	flac-devel >= 1.1.0
-Requires:	gavl-devel >= 1.2.0
+Requires:	flac-devel >= 1.2.0
+Requires:	gavl-devel >= 1.4.0
 Requires:	libcdio-devel >= 0.76
 Requires:	libdts-devel >= 0.0.2
-#Requires:	libdvdread-devel >= 0.9.5
+Requires:	libdvdread-devel >= 0.9.5
 Requires:	libmad-devel >= 0.15.0
 Requires:	libmpcdec-devel >= 1.1
 Requires:	libmpeg2-devel >= 0.4.0
-Requires:	libogg-devel >= 1.0
+Requires:	libogg-devel >= 1:1.1
 Requires:	libpng-devel >= 1.2.2
 %{?with_smb:Requires:	libsmbclient-devel >= 3.0.0}
 Requires:	libtheora-devel >= 1.0.0
 Requires:	libtiff-devel >= 3.5.0
 Requires:	libvdpau-devel
-Requires:	libvorbis-devel >= 1.0
+Requires:	libvorbis-devel >= 1:1.0
 Requires:	mjpegtools-devel >= 1.9.0
 Requires:	openjpeg-devel >= 1.3
 Requires:	schroedinger-devel >= 1.0.5
@@ -154,6 +158,7 @@ Wtyczki avdec dla biblioteki Gmerlin.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__libtoolize}
@@ -216,5 +221,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/gmerlin/plugins/i_avdec.so
 # separate packages?
 %attr(755,root,root) %{_libdir}/gmerlin/plugins/i_dvb.so
-#%attr(755,root,root) %{_libdir}/gmerlin/plugins/i_dvd.so
+%attr(755,root,root) %{_libdir}/gmerlin/plugins/i_dvd.so
 %attr(755,root,root) %{_libdir}/gmerlin/plugins/i_vcd.so
