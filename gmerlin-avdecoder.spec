@@ -1,4 +1,4 @@
-# TODO: shared libgsm?
+# NOTE: internal gsm610 lib is significantly modified
 #
 # Conditional build:
 %bcond_without	apidocs		# without doc
