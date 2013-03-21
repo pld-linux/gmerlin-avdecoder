@@ -218,8 +218,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n gmerlin-plugin-avdec
 %defattr(644,root,root,755)
+# no reason for separate packages:
+# all plugins make use of just libgmerlin_avcodec (external libs not linked directly)
 %attr(755,root,root) %{_libdir}/gmerlin/plugins/i_avdec.so
-# separate packages?
 %attr(755,root,root) %{_libdir}/gmerlin/plugins/i_dvb.so
 %attr(755,root,root) %{_libdir}/gmerlin/plugins/i_dvd.so
 %attr(755,root,root) %{_libdir}/gmerlin/plugins/i_vcd.so
