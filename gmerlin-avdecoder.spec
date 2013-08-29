@@ -17,6 +17,7 @@ Patch0:		%{name}-cflags.patch
 Patch1:		%{name}-ffmpeg-0.8.patch
 Patch2:		%{name}-link.patch
 Patch3:		%{name}-am.patch
+Patch4:		%{name}-ffmpeg2.patch
 URL:		http://gmerlin.sourceforge.net/avdec_frame.html
 BuildRequires:	a52dec-libs-devel >= 0.7.4
 BuildRequires:	autoconf >= 2.50
@@ -159,6 +160,7 @@ Wtyczki avdec dla biblioteki Gmerlin.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__libtoolize}

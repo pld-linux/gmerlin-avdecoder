@@ -1,0 +1,60 @@
+--- gmerlin-avdecoder-1.2.0/lib/demux_ffmpeg.c~	2012-06-08 13:51:34.000000000 +0200
++++ gmerlin-avdecoder-1.2.0/lib/demux_ffmpeg.c	2013-08-29 19:28:23.730802737 +0200
+@@ -209,7 +209,7 @@
+ 
+ typedef struct
+   {
+-  enum CodecID id;
++  enum AVCodecID id;
+   uint32_t fourcc;
+   int bits; /* For audio codecs */
+   uint32_t codec_tag;
+@@ -347,7 +347,7 @@
+ 
+ typedef struct
+   {
+-  enum CodecID id;
++  enum AVCodecID id;
+   uint32_t fourcc;
+   } video_codec_map_t;
+ 
+--- gmerlin-avdecoder-1.2.0/lib/audio_ffmpeg.c~	2012-06-08 13:51:34.000000000 +0200
++++ gmerlin-avdecoder-1.2.0/lib/audio_ffmpeg.c	2013-08-29 19:28:41.767694837 +0200
+@@ -99,7 +99,7 @@
+   {
+   const char * decoder_name;
+   const char * format_name;
+-  enum CodecID ffmpeg_id;
++  enum AVCodecID ffmpeg_id;
+   uint32_t * fourccs;
+   int codec_tag;
+   int preroll;
+--- gmerlin-avdecoder-1.2.0/lib/video_ffmpeg.c~	2012-06-08 13:51:34.000000000 +0200
++++ gmerlin-avdecoder-1.2.0/lib/video_ffmpeg.c	2013-08-29 19:29:53.311922098 +0200
+@@ -92,7 +92,7 @@
+   {
+   const char * decoder_name;
+   const char * format_name;
+-  enum CodecID ffmpeg_id;
++  enum AVCodecID ffmpeg_id;
+   uint32_t * fourccs;
+ 
+   int (*get_format)(bgav_stream_t*, bgav_packet_t * p);
+@@ -695,7 +695,7 @@
+   }
+ 
+ #ifdef HAVE_VDPAU
+-static AVCodec * find_decoder(enum CodecID id, bgav_stream_t * s)
++static AVCodec * find_decoder(enum AVCodecID id, bgav_stream_t * s)
+   {
+   AVCodec * ret = NULL;
+ 
+@@ -740,7 +740,7 @@
+     }
+   }
+ 
+-static int init_vdpau(bgav_stream_t * s, enum CodecID id)
++static int init_vdpau(bgav_stream_t * s, enum AVCodecID id)
+   {
+   int i;
+   ffmpeg_video_priv * priv = s->data.video.decoder->priv;
