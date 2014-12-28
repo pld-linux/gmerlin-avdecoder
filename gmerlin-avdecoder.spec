@@ -28,7 +28,7 @@ BuildRequires:	faad2-devel >= 2.0
 BuildRequires:	ffmpeg-devel >= 0.7
 BuildRequires:	flac-devel >= 1.2.0
 BuildRequires:	gavl-devel >= 1.4.0
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	gmerlin-devel >= 1.2.0
 BuildRequires:	libcdio-devel >= 0.76
 BuildRequires:	libdts-devel >= 0.0.2
