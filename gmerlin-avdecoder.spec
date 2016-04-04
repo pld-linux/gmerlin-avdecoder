@@ -3,12 +3,13 @@
 # Conditional build:
 %bcond_without	apidocs		# without doc
 %bcond_without	smb		# SMB support
+%bcond_with	vdpau		# VDPAU support
 #
 Summary:	Multiformat media decoding library
 Summary(pl.UTF-8):	Biblioteka dekodująca wiele formatów multimedialnych
 Name:		gmerlin-avdecoder
 Version:	1.2.0
-Release:	6
+Release:	7
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/gmerlin/%{name}-%{version}.tar.gz
@@ -18,6 +19,7 @@ Patch1:		%{name}-ffmpeg-0.8.patch
 Patch2:		%{name}-link.patch
 Patch3:		%{name}-am.patch
 Patch4:		%{name}-ffmpeg2.patch
+Patch5:		ffmpeg3.patch
 URL:		http://gmerlin.sourceforge.net/avdec_frame.html
 BuildRequires:	a52dec-libs-devel >= 0.7.4
 BuildRequires:	autoconf >= 2.50
@@ -161,6 +163,7 @@ Wtyczki avdec dla biblioteki Gmerlin.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__libtoolize}
@@ -170,6 +173,7 @@ Wtyczki avdec dla biblioteki Gmerlin.
 %{__automake}
 %configure \
 	%{!?with_smb:--disable-samba} \
+	%{!?with_vdpau:--disable-vdpau} \
 	--enable-static \
 	%{!?with_apidocs:--without-doxygen} \
 	--with-cpuflags=none

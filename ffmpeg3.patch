@@ -1,0 +1,1998 @@
+diff -ur gmerlin-avdecoder-1.2.0.orig/lib/audio_ffmpeg.c gmerlin-avdecoder-1.2.0/lib/audio_ffmpeg.c
+--- gmerlin-avdecoder-1.2.0.orig/lib/audio_ffmpeg.c	2016-04-04 21:44:50.564926753 +0900
++++ gmerlin-avdecoder-1.2.0/lib/audio_ffmpeg.c	2016-04-04 21:49:15.859212639 +0900
+@@ -565,174 +565,174 @@
+ 
+ static codec_info_t codec_infos[] =
+   {
+-    /*     CODEC_ID_PCM_S16LE= 0x10000, */
+-    /*     CODEC_ID_PCM_S16BE, */
+-    /*     CODEC_ID_PCM_U16LE, */
+-    /*     CODEC_ID_PCM_U16BE, */
+-    /*     CODEC_ID_PCM_S8, */
+-    /*     CODEC_ID_PCM_U8, */
+-    /*     CODEC_ID_PCM_MULAW, */
+-    /*     CODEC_ID_PCM_ALAW, */
+-    /*     CODEC_ID_PCM_S32LE, */
+-    /*     CODEC_ID_PCM_S32BE, */
+-    /*     CODEC_ID_PCM_U32LE, */
+-    /*     CODEC_ID_PCM_U32BE, */
+-    /*     CODEC_ID_PCM_S24LE, */
+-    /*     CODEC_ID_PCM_S24BE, */
+-    /*     CODEC_ID_PCM_U24LE, */
+-    /*     CODEC_ID_PCM_U24BE, */
+-    /*     CODEC_ID_PCM_S24DAUD, */
+-    { "FFmpeg D-Cinema decoder", "D-Cinema", CODEC_ID_PCM_S24DAUD,
++    /*     AV_CODEC_ID_PCM_S16LE= 0x10000, */
++    /*     AV_CODEC_ID_PCM_S16BE, */
++    /*     AV_CODEC_ID_PCM_U16LE, */
++    /*     AV_CODEC_ID_PCM_U16BE, */
++    /*     AV_CODEC_ID_PCM_S8, */
++    /*     AV_CODEC_ID_PCM_U8, */
++    /*     AV_CODEC_ID_PCM_MULAW, */
++    /*     AV_CODEC_ID_PCM_ALAW, */
++    /*     AV_CODEC_ID_PCM_S32LE, */
++    /*     AV_CODEC_ID_PCM_S32BE, */
++    /*     AV_CODEC_ID_PCM_U32LE, */
++    /*     AV_CODEC_ID_PCM_U32BE, */
++    /*     AV_CODEC_ID_PCM_S24LE, */
++    /*     AV_CODEC_ID_PCM_S24BE, */
++    /*     AV_CODEC_ID_PCM_U24LE, */
++    /*     AV_CODEC_ID_PCM_U24BE, */
++    /*     AV_CODEC_ID_PCM_S24DAUD, */
++    { "FFmpeg D-Cinema decoder", "D-Cinema", AV_CODEC_ID_PCM_S24DAUD,
+       (uint32_t[]){ BGAV_MK_FOURCC('d','a','u','d'),
+                0x00 },
+       -1 },
+-    /*     CODEC_ID_PCM_ZORK, */
++    /*     AV_CODEC_ID_PCM_ZORK, */
+ 
+-    /*     CODEC_ID_ADPCM_IMA_QT= 0x11000, */
+-    { "FFmpeg ima4 decoder", "ima4", CODEC_ID_ADPCM_IMA_QT,
++    /*     AV_CODEC_ID_ADPCM_IMA_QT= 0x11000, */
++    { "FFmpeg ima4 decoder", "ima4", AV_CODEC_ID_ADPCM_IMA_QT,
+       (uint32_t[]){ BGAV_MK_FOURCC('i', 'm', 'a', '4'), 0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_IMA_WAV, */
++    /*     AV_CODEC_ID_ADPCM_IMA_WAV, */
+ 
+-    { "FFmpeg WAV ADPCM decoder", "WAV IMA ADPCM", CODEC_ID_ADPCM_IMA_WAV,
++    { "FFmpeg WAV ADPCM decoder", "WAV IMA ADPCM", AV_CODEC_ID_ADPCM_IMA_WAV,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x11),
+                     BGAV_MK_FOURCC('m', 's', 0x00, 0x11), 0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_IMA_DK3, */
+-    { "FFmpeg IMA DK3 decoder", "IMA DK3", CODEC_ID_ADPCM_IMA_DK3,
++    /*     AV_CODEC_ID_ADPCM_IMA_DK3, */
++    { "FFmpeg IMA DK3 decoder", "IMA DK3", AV_CODEC_ID_ADPCM_IMA_DK3,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x62), 0x00 },
+       -1 },  /* rogue format number */
+-    /*     CODEC_ID_ADPCM_IMA_DK4, */
+-    { "FFmpeg IMA DK4 decoder", "IMA DK4", CODEC_ID_ADPCM_IMA_DK4,
++    /*     AV_CODEC_ID_ADPCM_IMA_DK4, */
++    { "FFmpeg IMA DK4 decoder", "IMA DK4", AV_CODEC_ID_ADPCM_IMA_DK4,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x61), 0x00 },
+       -1 },  /* rogue format number */
+-    /*     CODEC_ID_ADPCM_IMA_WS, */
+-    { "FFmpeg Westwood ADPCM decoder", "Westwood ADPCM", CODEC_ID_ADPCM_IMA_WS,
++    /*     AV_CODEC_ID_ADPCM_IMA_WS, */
++    { "FFmpeg Westwood ADPCM decoder", "Westwood ADPCM", AV_CODEC_ID_ADPCM_IMA_WS,
+       (uint32_t[]){ BGAV_MK_FOURCC('w','s','p','c'), 0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_IMA_SMJPEG, */
+-    { "FFmpeg SMJPEG audio decoder", "SMJPEG audio", CODEC_ID_ADPCM_IMA_SMJPEG,
++    /*     AV_CODEC_ID_ADPCM_IMA_SMJPEG, */
++    { "FFmpeg SMJPEG audio decoder", "SMJPEG audio", AV_CODEC_ID_ADPCM_IMA_SMJPEG,
+       (uint32_t[]){ BGAV_MK_FOURCC('S','M','J','A'), 0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_MS, */
+-    { "FFmpeg MS ADPCM decoder", "MS ADPCM", CODEC_ID_ADPCM_MS,
++    /*     AV_CODEC_ID_ADPCM_MS, */
++    { "FFmpeg MS ADPCM decoder", "MS ADPCM", AV_CODEC_ID_ADPCM_MS,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x02),
+                     BGAV_MK_FOURCC('m', 's', 0x00, 0x02), 0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_4XM, */
+-    { "FFmpeg 4xm audio decoder", "4XM ADPCM", CODEC_ID_ADPCM_4XM,
++    /*     AV_CODEC_ID_ADPCM_4XM, */
++    { "FFmpeg 4xm audio decoder", "4XM ADPCM", AV_CODEC_ID_ADPCM_4XM,
+       (uint32_t[]){ BGAV_MK_FOURCC('4', 'X', 'M', 'A'), 0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_XA, */
+-    { "FFmpeg Playstation ADPCM decoder", "Playstation ADPCM", CODEC_ID_ADPCM_XA,
++    /*     AV_CODEC_ID_ADPCM_XA, */
++    { "FFmpeg Playstation ADPCM decoder", "Playstation ADPCM", AV_CODEC_ID_ADPCM_XA,
+       (uint32_t[]){ BGAV_MK_FOURCC('A','D','X','A'),
+                0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_ADX, */
++    /*     AV_CODEC_ID_ADPCM_ADX, */
+     
+-    /*     CODEC_ID_ADPCM_EA, */
++    /*     AV_CODEC_ID_ADPCM_EA, */
+     { "FFmpeg Electronicarts ADPCM decoder", "Electronicarts ADPCM",
+-      CODEC_ID_ADPCM_EA,
++      AV_CODEC_ID_ADPCM_EA,
+       (uint32_t[]){ BGAV_MK_FOURCC('w','v','e','a'),
+                     0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_G726, */
+-    { "FFmpeg G726 decoder", "G726 ADPCM", CODEC_ID_ADPCM_G726,
++    /*     AV_CODEC_ID_ADPCM_G726, */
++    { "FFmpeg G726 decoder", "G726 ADPCM", AV_CODEC_ID_ADPCM_G726,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x0045),
+                     0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_CT, */
+-    { "FFmpeg Creative ADPCM decoder", "Creative ADPCM", CODEC_ID_ADPCM_CT,
++    /*     AV_CODEC_ID_ADPCM_CT, */
++    { "FFmpeg Creative ADPCM decoder", "Creative ADPCM", AV_CODEC_ID_ADPCM_CT,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x200),
+                     0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_SWF, */
++    /*     AV_CODEC_ID_ADPCM_SWF, */
+ #if 1 // Sounds disgusting (with ffplay as well). zelda.flv
+-    { "FFmpeg Flash ADPCM decoder", "Flash ADPCM", CODEC_ID_ADPCM_SWF,
++    { "FFmpeg Flash ADPCM decoder", "Flash ADPCM", AV_CODEC_ID_ADPCM_SWF,
+       (uint32_t[]){ BGAV_MK_FOURCC('F', 'L', 'A', '1'), 0x00 },
+       -1 },
+ #endif
+-    /*     CODEC_ID_ADPCM_YAMAHA, */
+-    { "FFmpeg SMAF audio decoder", "SMAF", CODEC_ID_ADPCM_YAMAHA,
++    /*     AV_CODEC_ID_ADPCM_YAMAHA, */
++    { "FFmpeg SMAF audio decoder", "SMAF", AV_CODEC_ID_ADPCM_YAMAHA,
+       (uint32_t[]){ BGAV_MK_FOURCC('S', 'M', 'A', 'F'),
+                0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_SBPRO_4, */
++    /*     AV_CODEC_ID_ADPCM_SBPRO_4, */
+     { "FFmpeg Soundblaster Pro ADPCM 4 decoder", "Soundblaster Pro ADPCM 4",
+-      CODEC_ID_ADPCM_SBPRO_4,
++      AV_CODEC_ID_ADPCM_SBPRO_4,
+       (uint32_t[]){ BGAV_MK_FOURCC('S', 'B', 'P', '4'), 0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_SBPRO_3, */
++    /*     AV_CODEC_ID_ADPCM_SBPRO_3, */
+     { "FFmpeg Soundblaster Pro ADPCM 3 decoder", "Soundblaster Pro ADPCM 3",
+-      CODEC_ID_ADPCM_SBPRO_3,
++      AV_CODEC_ID_ADPCM_SBPRO_3,
+       (uint32_t[]){ BGAV_MK_FOURCC('S', 'B', 'P', '3'), 0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_SBPRO_2, */
++    /*     AV_CODEC_ID_ADPCM_SBPRO_2, */
+     { "FFmpeg Soundblaster Pro ADPCM 2 decoder", "Soundblaster Pro ADPCM 2",
+-      CODEC_ID_ADPCM_SBPRO_2,
++      AV_CODEC_ID_ADPCM_SBPRO_2,
+       (uint32_t[]){ BGAV_MK_FOURCC('S', 'B', 'P', '2'), 0x00 },
+       -1 },
+-    /*     CODEC_ID_ADPCM_THP, */
+-    { "FFmpeg THP Audio decoder", "THP Audio", CODEC_ID_ADPCM_THP,
++    /*     AV_CODEC_ID_ADPCM_THP, */
++    { "FFmpeg THP Audio decoder", "THP Audio", AV_CODEC_ID_ADPCM_THP,
+       (uint32_t[]){ BGAV_MK_FOURCC('T', 'H', 'P', 'A'),
+                0x00 } },
+-    /*     CODEC_ID_ADPCM_IMA_AMV, */
+-    /*     CODEC_ID_ADPCM_EA_R1, */
+-    /*     CODEC_ID_ADPCM_EA_R3, */
+-    /*     CODEC_ID_ADPCM_EA_R2, */
+-    /*     CODEC_ID_ADPCM_IMA_EA_SEAD, */
+-    /*     CODEC_ID_ADPCM_IMA_EA_EACS, */
+-    /*     CODEC_ID_ADPCM_EA_XAS, */
+-    /*     CODEC_ID_AMR_NB= 0x12000, */
+-    /*     CODEC_ID_AMR_WB, */
+-    /*     CODEC_ID_RA_144= 0x13000, */
+-    { "FFmpeg ra14.4 decoder", "Real audio 14.4", CODEC_ID_RA_144,
++    /*     AV_CODEC_ID_ADPCM_IMA_AMV, */
++    /*     AV_CODEC_ID_ADPCM_EA_R1, */
++    /*     AV_CODEC_ID_ADPCM_EA_R3, */
++    /*     AV_CODEC_ID_ADPCM_EA_R2, */
++    /*     AV_CODEC_ID_ADPCM_IMA_EA_SEAD, */
++    /*     AV_CODEC_ID_ADPCM_IMA_EA_EACS, */
++    /*     AV_CODEC_ID_ADPCM_EA_XAS, */
++    /*     AV_CODEC_ID_AMR_NB= 0x12000, */
++    /*     AV_CODEC_ID_AMR_WB, */
++    /*     AV_CODEC_ID_RA_144= 0x13000, */
++    { "FFmpeg ra14.4 decoder", "Real audio 14.4", AV_CODEC_ID_RA_144,
+       (uint32_t[]){ BGAV_MK_FOURCC('1', '4', '_', '4'),
+                BGAV_MK_FOURCC('l', 'p', 'c', 'J'),
+                     0x00 },
+       -1 },
+-    /*     CODEC_ID_RA_288, */
+-    { "FFmpeg ra28.8 decoder", "Real audio 28.8", CODEC_ID_RA_288,
++    /*     AV_CODEC_ID_RA_288, */
++    { "FFmpeg ra28.8 decoder", "Real audio 28.8", AV_CODEC_ID_RA_288,
+       (uint32_t[]){ BGAV_MK_FOURCC('2', '8', '_', '8'), 0x00 },
+       -1 },
+ 
+-    /*     CODEC_ID_ROQ_DPCM= 0x14000, */
+-    { "FFmpeg ID Roq Audio decoder", "ID Roq Audio", CODEC_ID_ROQ_DPCM,
++    /*     AV_CODEC_ID_ROQ_DPCM= 0x14000, */
++    { "FFmpeg ID Roq Audio decoder", "ID Roq Audio", AV_CODEC_ID_ROQ_DPCM,
+       (uint32_t[]){ BGAV_MK_FOURCC('R','O','Q','A'),
+                0x00 },
+       -1 },
+-    /*     CODEC_ID_INTERPLAY_DPCM, */
+-    { "FFmpeg Interplay DPCM decoder", "Interplay DPCM", CODEC_ID_INTERPLAY_DPCM,
++    /*     AV_CODEC_ID_INTERPLAY_DPCM, */
++    { "FFmpeg Interplay DPCM decoder", "Interplay DPCM", AV_CODEC_ID_INTERPLAY_DPCM,
+       (uint32_t[]){ BGAV_MK_FOURCC('I','P','D','C'),
+                0x00 },
+       1 },
+     
+-    /*     CODEC_ID_XAN_DPCM, */
+-    /*     CODEC_ID_SOL_DPCM, */
+-    { "FFmpeg Old SOL decoder", "SOL (old)", CODEC_ID_SOL_DPCM,
++    /*     AV_CODEC_ID_XAN_DPCM, */
++    /*     AV_CODEC_ID_SOL_DPCM, */
++    { "FFmpeg Old SOL decoder", "SOL (old)", AV_CODEC_ID_SOL_DPCM,
+       (uint32_t[]){ BGAV_MK_FOURCC('S','O','L','1'),
+                0x00 },
+       1 },
+ 
+-    { "FFmpeg SOL decoder (8 bit)", "SOL 8 bit", CODEC_ID_SOL_DPCM,
++    { "FFmpeg SOL decoder (8 bit)", "SOL 8 bit", AV_CODEC_ID_SOL_DPCM,
+       (uint32_t[]){ BGAV_MK_FOURCC('S','O','L','2'),
+                0x00 },
+       2 },
+ 
+-    { "FFmpeg SOL decoder (16 bit)", "SOL 16 bit", CODEC_ID_SOL_DPCM,
++    { "FFmpeg SOL decoder (16 bit)", "SOL 16 bit", AV_CODEC_ID_SOL_DPCM,
+       (uint32_t[]){ BGAV_MK_FOURCC('S','O','L','3'),
+                     0x00 },
+       3 },
+ 
+-    /*     CODEC_ID_MP2= 0x15000, */
++    /*     AV_CODEC_ID_MP2= 0x15000, */
+ #if 0
+-    { "FFmpeg mp2 decoder", "MPEG audio Layer 1/2/3", CODEC_ID_MP2,
++    { "FFmpeg mp2 decoder", "MPEG audio Layer 1/2/3", AV_CODEC_ID_MP2,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x50), 0x00 },
+       -1 },
+ #endif
+-    /*     CODEC_ID_MP3, /\* preferred ID for decoding MPEG audio layer 1, 2 or 3 *\/ */
++    /*     AV_CODEC_ID_MP3, /\* preferred ID for decoding MPEG audio layer 1, 2 or 3 *\/ */
+ #if 0    
+-    { "FFmpeg mp3 decoder", "MPEG audio Layer 1/2/3", CODEC_ID_MP3,
++    { "FFmpeg mp3 decoder", "MPEG audio Layer 1/2/3", AV_CODEC_ID_MP3,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x55),
+                BGAV_MK_FOURCC('.', 'm', 'p', '3'),
+                BGAV_MK_FOURCC('m', 's', 0x00, 0x55),
+@@ -740,138 +740,138 @@
+       -1 },
+     
+ #endif
+-    /*     CODEC_ID_AAC, */
+-    /*     CODEC_ID_AC3, */
++    /*     AV_CODEC_ID_AAC, */
++    /*     AV_CODEC_ID_AC3, */
+ #if 0    
+-    { "FFmpeg ac3 decoder", "AC3", CODEC_ID_AC3,
++    { "FFmpeg ac3 decoder", "AC3", AV_CODEC_ID_AC3,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x2000),
+                     BGAV_MK_FOURCC('.', 'a', 'c', '3'),
+                     0x00 },
+       -1 },
+ #endif
+-    /*     CODEC_ID_DTS, */
+-    /*     CODEC_ID_VORBIS, */
+-    /*     CODEC_ID_DVAUDIO, */
+-    /*     CODEC_ID_WMAV1, */
+-    { "FFmpeg WMA1 decoder", "Window Media Audio 1", CODEC_ID_WMAV1,
++    /*     AV_CODEC_ID_DTS, */
++    /*     AV_CODEC_ID_VORBIS, */
++    /*     AV_CODEC_ID_DVAUDIO, */
++    /*     AV_CODEC_ID_WMAV1, */
++    { "FFmpeg WMA1 decoder", "Window Media Audio 1", AV_CODEC_ID_WMAV1,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x160), 0x00 },
+       -1 },
+-    /*     CODEC_ID_WMAV2, */
+-    { "FFmpeg WMA2 decoder", "Window Media Audio 2", CODEC_ID_WMAV2,
++    /*     AV_CODEC_ID_WMAV2, */
++    { "FFmpeg WMA2 decoder", "Window Media Audio 2", AV_CODEC_ID_WMAV2,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x161), 0x00 },
+       -1 },
+-    /*     CODEC_ID_MACE3, */
+-    { "FFmpeg MACE3 decoder", "Apple MACE 3", CODEC_ID_MACE3,
++    /*     AV_CODEC_ID_MACE3, */
++    { "FFmpeg MACE3 decoder", "Apple MACE 3", AV_CODEC_ID_MACE3,
+       (uint32_t[]){ BGAV_MK_FOURCC('M', 'A', 'C', '3'), 0x00 },
+       -1 },
+-    /*     CODEC_ID_MACE6, */
+-    { "FFmpeg MACE6 decoder", "Apple MACE 6", CODEC_ID_MACE6,
++    /*     AV_CODEC_ID_MACE6, */
++    { "FFmpeg MACE6 decoder", "Apple MACE 6", AV_CODEC_ID_MACE6,
+       (uint32_t[]){ BGAV_MK_FOURCC('M', 'A', 'C', '6'), 0x00 },
+       -1 },
+-    /*     CODEC_ID_VMDAUDIO, */
++    /*     AV_CODEC_ID_VMDAUDIO, */
+     { "FFmpeg Sierra VMD audio decoder", "Sierra VMD audio",
+-      CODEC_ID_VMDAUDIO,
++      AV_CODEC_ID_VMDAUDIO,
+       (uint32_t[]){ BGAV_MK_FOURCC('V', 'M', 'D', 'A'),
+                     0x00 } },
+-    /*     CODEC_ID_SONIC, */
+-    { "FFmpeg Sonic decoder", "Sonic", CODEC_ID_SONIC,
++    /*     AV_CODEC_ID_SONIC, */
++    { "FFmpeg Sonic decoder", "Sonic", AV_CODEC_ID_SONIC,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x2048), 0x00 },
+       -1 },
+     
+-    /*     CODEC_ID_SONIC_LS, */
+-    /*     CODEC_ID_FLAC, */
+-    /*     CODEC_ID_MP3ADU, */
++    /*     AV_CODEC_ID_SONIC_LS, */
++    /*     AV_CODEC_ID_FLAC, */
++    /*     AV_CODEC_ID_MP3ADU, */
+ #if 1 // Sounds disgusting
+-    { "FFmpeg mp3 ADU decoder", "MP3 ADU", CODEC_ID_MP3ADU,
++    { "FFmpeg mp3 ADU decoder", "MP3 ADU", AV_CODEC_ID_MP3ADU,
+       (uint32_t[]){ BGAV_MK_FOURCC('r', 'm', 'p', '3'),
+                     0x00 },
+       -1 },
+ #endif
+-    /*     CODEC_ID_MP3ON4, */
+-    { "FFmpeg mp3on4 decoder", "MP3on4", CODEC_ID_MP3ON4,
++    /*     AV_CODEC_ID_MP3ON4, */
++    { "FFmpeg mp3on4 decoder", "MP3on4", AV_CODEC_ID_MP3ON4,
+       (uint32_t[]){ BGAV_MK_FOURCC('m', '4', 'a', 29),
+                     0x00 },
+       -1, 1152*32 },
+-    /*     CODEC_ID_SHORTEN, */
+-    { "FFmpeg Shorten decoder", "Shorten", CODEC_ID_SHORTEN,
++    /*     AV_CODEC_ID_SHORTEN, */
++    { "FFmpeg Shorten decoder", "Shorten", AV_CODEC_ID_SHORTEN,
+       (uint32_t[]){ BGAV_MK_FOURCC('.','s','h','n'),
+                0x00 },
+       -1 },
+-    /*     CODEC_ID_ALAC, */
+-    { "FFmpeg alac decoder", "alac", CODEC_ID_ALAC,
++    /*     AV_CODEC_ID_ALAC, */
++    { "FFmpeg alac decoder", "alac", AV_CODEC_ID_ALAC,
+       (uint32_t[]){ BGAV_MK_FOURCC('a', 'l', 'a', 'c'),
+                     0x00 },
+       -1 },
+-    /*     CODEC_ID_WESTWOOD_SND1, */
+-    { "FFmpeg Westwood SND1 decoder", "Westwood SND1", CODEC_ID_WESTWOOD_SND1,
++    /*     AV_CODEC_ID_WESTWOOD_SND1, */
++    { "FFmpeg Westwood SND1 decoder", "Westwood SND1", AV_CODEC_ID_WESTWOOD_SND1,
+       (uint32_t[]){ BGAV_MK_FOURCC('w','s','p','1'), 0x00 },
+       -1 },
+-    /*     CODEC_ID_GSM, /\* as in Berlin toast format *\/ */
+-    /*     CODEC_ID_QDM2, */
++    /*     AV_CODEC_ID_GSM, /\* as in Berlin toast format *\/ */
++    /*     AV_CODEC_ID_QDM2, */
+ #ifndef HAVE_W32DLL
+-    { "FFmpeg QDM2 decoder", "QDM2", CODEC_ID_QDM2,
++    { "FFmpeg QDM2 decoder", "QDM2", AV_CODEC_ID_QDM2,
+       (uint32_t[]){ BGAV_MK_FOURCC('Q', 'D', 'M', '2'),
+                     0x00 },
+       -1 },
+ #endif
+-    /*     CODEC_ID_COOK, */
+-    { "FFmpeg Real cook decoder", "Real cook", CODEC_ID_COOK,
++    /*     AV_CODEC_ID_COOK, */
++    { "FFmpeg Real cook decoder", "Real cook", AV_CODEC_ID_COOK,
+       (uint32_t[]){ BGAV_MK_FOURCC('c', 'o', 'o', 'k'),
+                     0x00 },
+       -1 },
+-    /*     CODEC_ID_TRUESPEECH, */
+-    { "FFmpeg Truespeech audio decoder", "Truespeech", CODEC_ID_TRUESPEECH,
++    /*     AV_CODEC_ID_TRUESPEECH, */
++    { "FFmpeg Truespeech audio decoder", "Truespeech", AV_CODEC_ID_TRUESPEECH,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x0022),
+                0x00 },
+       -1 },
+-    /*     CODEC_ID_TTA, */
+-    { "FFmpeg True audio decoder", "True audio", CODEC_ID_TTA,
++    /*     AV_CODEC_ID_TTA, */
++    { "FFmpeg True audio decoder", "True audio", AV_CODEC_ID_TTA,
+       (uint32_t[]){ BGAV_MK_FOURCC('T', 'T', 'A', '1'),
+                     0x00 },
+       -1 },
+-    /*     CODEC_ID_SMACKAUDIO, */
+-    { "FFmpeg Smacker Audio decoder", "Smacker Audio", CODEC_ID_SMACKAUDIO,
++    /*     AV_CODEC_ID_SMACKAUDIO, */
++    { "FFmpeg Smacker Audio decoder", "Smacker Audio", AV_CODEC_ID_SMACKAUDIO,
+       (uint32_t[]){ BGAV_MK_FOURCC('S','M','K','A'),
+                0x00 },
+       -1 },
+-    /*     CODEC_ID_QCELP, */
+-    /*     CODEC_ID_WAVPACK, */
+-    { "FFmpeg Wavpack decoder", "Wavpack", CODEC_ID_WAVPACK,
++    /*     AV_CODEC_ID_QCELP, */
++    /*     AV_CODEC_ID_WAVPACK, */
++    { "FFmpeg Wavpack decoder", "Wavpack", AV_CODEC_ID_WAVPACK,
+       (uint32_t[]){ BGAV_MK_FOURCC('w', 'v', 'p', 'k'),
+                     0x00 },
+       -1 },
+-    /*     CODEC_ID_DSICINAUDIO, */
++    /*     AV_CODEC_ID_DSICINAUDIO, */
+     { "FFmpeg Delphine CIN audio decoder", "Delphine CIN Audio",
+-      CODEC_ID_DSICINAUDIO,
++      AV_CODEC_ID_DSICINAUDIO,
+       (uint32_t[]){ BGAV_MK_FOURCC('d', 'c', 'i', 'n'),
+                0x00 },
+       -1 },
+-    /*     CODEC_ID_IMC, */
+-    { "FFmpeg Intel Music decoder", "Intel Music coder", CODEC_ID_IMC,
++    /*     AV_CODEC_ID_IMC, */
++    { "FFmpeg Intel Music decoder", "Intel Music coder", AV_CODEC_ID_IMC,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x0401),
+                0x00 },
+       -1 },
+-    /*     CODEC_ID_MUSEPACK7, */
+-    /*     CODEC_ID_MLP, */
+-    /*     CODEC_ID_GSM_MS, /\* as found in WAV *\/ */
+-    /*     CODEC_ID_ATRAC3, */
+-    { "FFmpeg ATRAC3 decoder", "ATRAC3", CODEC_ID_ATRAC3,
++    /*     AV_CODEC_ID_MUSEPACK7, */
++    /*     AV_CODEC_ID_MLP, */
++    /*     AV_CODEC_ID_GSM_MS, /\* as found in WAV *\/ */
++    /*     AV_CODEC_ID_ATRAC3, */
++    { "FFmpeg ATRAC3 decoder", "ATRAC3", AV_CODEC_ID_ATRAC3,
+       (uint32_t[]){ BGAV_MK_FOURCC('a', 't', 'r', 'c'),
+                     BGAV_WAVID_2_FOURCC(0x0270),
+                     0x00  } },
+-    /*     CODEC_ID_VOXWARE, */
+-    /*     CODEC_ID_APE, */
+-    { "FFmpeg Monkey's Audio decoder", "Monkey's Audio", CODEC_ID_APE,
++    /*     AV_CODEC_ID_VOXWARE, */
++    /*     AV_CODEC_ID_APE, */
++    { "FFmpeg Monkey's Audio decoder", "Monkey's Audio", AV_CODEC_ID_APE,
+       (uint32_t[]){ BGAV_MK_FOURCC('.', 'a', 'p', 'e'),
+                     0x00  } },
+-    /*     CODEC_ID_NELLYMOSER, */
+-    { "FFmpeg Nellymoser decoder", "Nellymoser", CODEC_ID_NELLYMOSER,
++    /*     AV_CODEC_ID_NELLYMOSER, */
++    { "FFmpeg Nellymoser decoder", "Nellymoser", AV_CODEC_ID_NELLYMOSER,
+       (uint32_t[]){ BGAV_MK_FOURCC('N', 'E', 'L', 'L'),
+                     0x00 },
+       -1 },
+     
+ #if LIBAVCODEC_BUILD >= ((52<<16)+(55<<8)+0)
+-    { "FFmpeg AMR NB decoder", "AMR Narrowband", CODEC_ID_AMR_NB,
++    { "FFmpeg AMR NB decoder", "AMR Narrowband", AV_CODEC_ID_AMR_NB,
+       (uint32_t[]){ BGAV_MK_FOURCC('s', 'a', 'm', 'r'),
+                     0x00 },
+       -1 },
+@@ -879,26 +879,26 @@
+ 
+     
+ #if LIBAVCODEC_BUILD >= ((52<<16)+(40<<8)+0)
+-    { "FFmpeg MPEG-4 ALS decoder", "MPEG-4 ALS", CODEC_ID_MP4ALS,
++    { "FFmpeg MPEG-4 ALS decoder", "MPEG-4 ALS", AV_CODEC_ID_MP4ALS,
+       (uint32_t[]){ BGAV_MK_FOURCC('m', 'a', 'l', 's'),
+                     0x00 },
+       -1 },
+ #endif
+ 
+-    { "FFmpeg MLP decoder", "MLP", CODEC_ID_MLP,
++    { "FFmpeg MLP decoder", "MLP", AV_CODEC_ID_MLP,
+       (uint32_t[]){ BGAV_MK_FOURCC('.', 'm', 'l', 'p'),
+                     0x00 },
+       -1 },
+ 
+ #if 0 // Experimental    
+-    { "FFmpeg WMA lossless decoder", "WMA lossless", CODEC_ID_WMALOSSLESS,
++    { "FFmpeg WMA lossless decoder", "WMA lossless", AV_CODEC_ID_WMALOSSLESS,
+       (uint32_t[]){ BGAV_WAVID_2_FOURCC(0x0163),
+                     0x00 },
+       -1 },
+ #endif
+     
+     
+-    /*     CODEC_ID_MUSEPACK8, */
++    /*     AV_CODEC_ID_MUSEPACK8, */
+   };
+ 
+ 
+diff -ur gmerlin-avdecoder-1.2.0.orig/lib/demux_ffmpeg.c gmerlin-avdecoder-1.2.0/lib/demux_ffmpeg.c
+--- gmerlin-avdecoder-1.2.0.orig/lib/demux_ffmpeg.c	2016-04-04 21:44:50.564926753 +0900
++++ gmerlin-avdecoder-1.2.0/lib/demux_ffmpeg.c	2016-04-04 21:47:54.417071137 +0900
+@@ -218,129 +218,129 @@
+ static audio_codec_map_t audio_codecs[] =
+   {
+     /* various PCM "codecs" */
+-    { CODEC_ID_PCM_S16LE, BGAV_WAVID_2_FOURCC(0x0001), 16 },
+-    { CODEC_ID_PCM_S16BE, BGAV_MK_FOURCC('t','w','o','s'), 16 },
+-    //    { CODEC_ID_PCM_U16LE, },
+-    //    { CODEC_ID_PCM_U16BE, },
+-    { CODEC_ID_PCM_S8, BGAV_MK_FOURCC('t','w','o','s'), 8},
+-    { CODEC_ID_PCM_U8, BGAV_WAVID_2_FOURCC(0x0001), 8},
+-    { CODEC_ID_PCM_MULAW, BGAV_MK_FOURCC('u', 'l', 'a', 'w')},
+-    { CODEC_ID_PCM_ALAW, BGAV_MK_FOURCC('a', 'l', 'a', 'w')},
+-    { CODEC_ID_PCM_S32LE, BGAV_WAVID_2_FOURCC(0x0001), 32 },
+-    { CODEC_ID_PCM_S32BE, BGAV_MK_FOURCC('t','w','o','s'), 32},
+-    //    { CODEC_ID_PCM_U32LE, },
+-    //    { CODEC_ID_PCM_U32BE, },
+-    { CODEC_ID_PCM_S24LE, BGAV_WAVID_2_FOURCC(0x0001), 24 },
+-    { CODEC_ID_PCM_S24BE, BGAV_MK_FOURCC('t','w','o','s'), 24},
+-    //    { CODEC_ID_PCM_U24LE, },
+-    //    { CODEC_ID_PCM_U24BE, },
+-    { CODEC_ID_PCM_S24DAUD, BGAV_MK_FOURCC('d','a','u','d') },
+-    // { CODEC_ID_PCM_ZORK, },
++    { AV_CODEC_ID_PCM_S16LE, BGAV_WAVID_2_FOURCC(0x0001), 16 },
++    { AV_CODEC_ID_PCM_S16BE, BGAV_MK_FOURCC('t','w','o','s'), 16 },
++    //    { AV_CODEC_ID_PCM_U16LE, },
++    //    { AV_CODEC_ID_PCM_U16BE, },
++    { AV_CODEC_ID_PCM_S8, BGAV_MK_FOURCC('t','w','o','s'), 8},
++    { AV_CODEC_ID_PCM_U8, BGAV_WAVID_2_FOURCC(0x0001), 8},
++    { AV_CODEC_ID_PCM_MULAW, BGAV_MK_FOURCC('u', 'l', 'a', 'w')},
++    { AV_CODEC_ID_PCM_ALAW, BGAV_MK_FOURCC('a', 'l', 'a', 'w')},
++    { AV_CODEC_ID_PCM_S32LE, BGAV_WAVID_2_FOURCC(0x0001), 32 },
++    { AV_CODEC_ID_PCM_S32BE, BGAV_MK_FOURCC('t','w','o','s'), 32},
++    //    { AV_CODEC_ID_PCM_U32LE, },
++    //    { AV_CODEC_ID_PCM_U32BE, },
++    { AV_CODEC_ID_PCM_S24LE, BGAV_WAVID_2_FOURCC(0x0001), 24 },
++    { AV_CODEC_ID_PCM_S24BE, BGAV_MK_FOURCC('t','w','o','s'), 24},
++    //    { AV_CODEC_ID_PCM_U24LE, },
++    //    { AV_CODEC_ID_PCM_U24BE, },
++    { AV_CODEC_ID_PCM_S24DAUD, BGAV_MK_FOURCC('d','a','u','d') },
++    // { AV_CODEC_ID_PCM_ZORK, },
+ 
+     /* various ADPCM codecs */
+-    { CODEC_ID_ADPCM_IMA_QT, BGAV_MK_FOURCC('i', 'm', 'a', '4')},
+-    { CODEC_ID_ADPCM_IMA_WAV, BGAV_WAVID_2_FOURCC(0x11) },
+-    { CODEC_ID_ADPCM_IMA_DK3, BGAV_WAVID_2_FOURCC(0x62) },
+-    { CODEC_ID_ADPCM_IMA_DK4, BGAV_WAVID_2_FOURCC(0x61) },
+-    { CODEC_ID_ADPCM_IMA_WS, BGAV_MK_FOURCC('w','s','p','c') },
+-    { CODEC_ID_ADPCM_IMA_SMJPEG, BGAV_MK_FOURCC('S','M','J','A') },
+-    { CODEC_ID_ADPCM_MS, BGAV_WAVID_2_FOURCC(0x02) },
+-    { CODEC_ID_ADPCM_4XM, BGAV_MK_FOURCC('4', 'X', 'M', 'A') },
+-    { CODEC_ID_ADPCM_XA, BGAV_MK_FOURCC('A','D','X','A') },
+-    //    { CODEC_ID_ADPCM_ADX, },
+-    { CODEC_ID_ADPCM_EA, BGAV_MK_FOURCC('w','v','e','a') },
+-    { CODEC_ID_ADPCM_G726, BGAV_WAVID_2_FOURCC(0x0045) },
+-    { CODEC_ID_ADPCM_CT, BGAV_WAVID_2_FOURCC(0x200)},
+-    { CODEC_ID_ADPCM_SWF, BGAV_MK_FOURCC('F', 'L', 'A', '1') },
+-    { CODEC_ID_ADPCM_YAMAHA, BGAV_MK_FOURCC('S', 'M', 'A', 'F') },
+-    { CODEC_ID_ADPCM_SBPRO_4, BGAV_MK_FOURCC('S', 'B', 'P', '4') },
+-    { CODEC_ID_ADPCM_SBPRO_3, BGAV_MK_FOURCC('S', 'B', 'P', '3') },
+-    { CODEC_ID_ADPCM_SBPRO_2, BGAV_MK_FOURCC('S', 'B', 'P', '2') },
++    { AV_CODEC_ID_ADPCM_IMA_QT, BGAV_MK_FOURCC('i', 'm', 'a', '4')},
++    { AV_CODEC_ID_ADPCM_IMA_WAV, BGAV_WAVID_2_FOURCC(0x11) },
++    { AV_CODEC_ID_ADPCM_IMA_DK3, BGAV_WAVID_2_FOURCC(0x62) },
++    { AV_CODEC_ID_ADPCM_IMA_DK4, BGAV_WAVID_2_FOURCC(0x61) },
++    { AV_CODEC_ID_ADPCM_IMA_WS, BGAV_MK_FOURCC('w','s','p','c') },
++    { AV_CODEC_ID_ADPCM_IMA_SMJPEG, BGAV_MK_FOURCC('S','M','J','A') },
++    { AV_CODEC_ID_ADPCM_MS, BGAV_WAVID_2_FOURCC(0x02) },
++    { AV_CODEC_ID_ADPCM_4XM, BGAV_MK_FOURCC('4', 'X', 'M', 'A') },
++    { AV_CODEC_ID_ADPCM_XA, BGAV_MK_FOURCC('A','D','X','A') },
++    //    { AV_CODEC_ID_ADPCM_ADX, },
++    { AV_CODEC_ID_ADPCM_EA, BGAV_MK_FOURCC('w','v','e','a') },
++    { AV_CODEC_ID_ADPCM_G726, BGAV_WAVID_2_FOURCC(0x0045) },
++    { AV_CODEC_ID_ADPCM_CT, BGAV_WAVID_2_FOURCC(0x200)},
++    { AV_CODEC_ID_ADPCM_SWF, BGAV_MK_FOURCC('F', 'L', 'A', '1') },
++    { AV_CODEC_ID_ADPCM_YAMAHA, BGAV_MK_FOURCC('S', 'M', 'A', 'F') },
++    { AV_CODEC_ID_ADPCM_SBPRO_4, BGAV_MK_FOURCC('S', 'B', 'P', '4') },
++    { AV_CODEC_ID_ADPCM_SBPRO_3, BGAV_MK_FOURCC('S', 'B', 'P', '3') },
++    { AV_CODEC_ID_ADPCM_SBPRO_2, BGAV_MK_FOURCC('S', 'B', 'P', '2') },
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(40<<8)+4)
+-    { CODEC_ID_ADPCM_THP, BGAV_MK_FOURCC('T', 'H', 'P', 'A') },
++    { AV_CODEC_ID_ADPCM_THP, BGAV_MK_FOURCC('T', 'H', 'P', 'A') },
+ #endif
+-    //    { CODEC_ID_ADPCM_IMA_AMV, },
+-    //    { CODEC_ID_ADPCM_EA_R1, },
+-    //    { CODEC_ID_ADPCM_EA_R3, },
+-    //    { CODEC_ID_ADPCM_EA_R2, },
+-    //    { CODEC_ID_ADPCM_IMA_EA_SEAD, },
+-    //    { CODEC_ID_ADPCM_IMA_EA_EACS, },
+-    //    { CODEC_ID_ADPCM_EA_XAS, },
++    //    { AV_CODEC_ID_ADPCM_IMA_AMV, },
++    //    { AV_CODEC_ID_ADPCM_EA_R1, },
++    //    { AV_CODEC_ID_ADPCM_EA_R3, },
++    //    { AV_CODEC_ID_ADPCM_EA_R2, },
++    //    { AV_CODEC_ID_ADPCM_IMA_EA_SEAD, },
++    //    { AV_CODEC_ID_ADPCM_IMA_EA_EACS, },
++    //    { AV_CODEC_ID_ADPCM_EA_XAS, },
+ 
+         /* AMR */
+-    //    { CODEC_ID_AMR_NB, },
+-    //    { CODEC_ID_AMR_WB, },
++    //    { AV_CODEC_ID_AMR_NB, },
++    //    { AV_CODEC_ID_AMR_WB, },
+ 
+     /* RealAudio codecs*/
+-    { CODEC_ID_RA_144, BGAV_MK_FOURCC('1', '4', '_', '4') },
+-    { CODEC_ID_RA_288, BGAV_MK_FOURCC('2', '8', '_', '8') },
++    { AV_CODEC_ID_RA_144, BGAV_MK_FOURCC('1', '4', '_', '4') },
++    { AV_CODEC_ID_RA_288, BGAV_MK_FOURCC('2', '8', '_', '8') },
+ 
+     /* various DPCM codecs */
+-    { CODEC_ID_ROQ_DPCM, BGAV_MK_FOURCC('R','O','Q','A') },
+-    { CODEC_ID_INTERPLAY_DPCM, BGAV_MK_FOURCC('I','P','D','C') },
++    { AV_CODEC_ID_ROQ_DPCM, BGAV_MK_FOURCC('R','O','Q','A') },
++    { AV_CODEC_ID_INTERPLAY_DPCM, BGAV_MK_FOURCC('I','P','D','C') },
+     
+-    //    { CODEC_ID_XAN_DPCM, },
+-    { CODEC_ID_SOL_DPCM, BGAV_MK_FOURCC('S','O','L','1'), 0, 1 },
+-    { CODEC_ID_SOL_DPCM, BGAV_MK_FOURCC('S','O','L','2'), 0, 2 },
+-    { CODEC_ID_SOL_DPCM, BGAV_MK_FOURCC('S','O','L','3'), 0, 3 },
++    //    { AV_CODEC_ID_XAN_DPCM, },
++    { AV_CODEC_ID_SOL_DPCM, BGAV_MK_FOURCC('S','O','L','1'), 0, 1 },
++    { AV_CODEC_ID_SOL_DPCM, BGAV_MK_FOURCC('S','O','L','2'), 0, 2 },
++    { AV_CODEC_ID_SOL_DPCM, BGAV_MK_FOURCC('S','O','L','3'), 0, 3 },
+     
+-    { CODEC_ID_MP2, BGAV_MK_FOURCC('.','m','p','2') },
+-    { CODEC_ID_MP3, BGAV_MK_FOURCC('.','m','p','3') }, /* preferred ID for decoding MPEG audio layer 1, }, 2 or 3 */
+-    { CODEC_ID_AAC, BGAV_MK_FOURCC('a','a','c',' ') },
+-    { CODEC_ID_AC3, BGAV_MK_FOURCC('.', 'a', 'c', '3') },
+-    { CODEC_ID_DTS, BGAV_MK_FOURCC('d', 't', 's', ' ') },
+-    //    { CODEC_ID_VORBIS, },
+-    //    { CODEC_ID_DVAUDIO, },
+-    { CODEC_ID_WMAV1, BGAV_WAVID_2_FOURCC(0x160) },
+-    { CODEC_ID_WMAV2, BGAV_WAVID_2_FOURCC(0x161) },
+-    { CODEC_ID_MACE3, BGAV_MK_FOURCC('M', 'A', 'C', '3') },
+-    { CODEC_ID_MACE6, BGAV_MK_FOURCC('M', 'A', 'C', '6') },
+-    { CODEC_ID_VMDAUDIO, BGAV_MK_FOURCC('V', 'M', 'D', 'A')},
+-    { CODEC_ID_SONIC, BGAV_WAVID_2_FOURCC(0x2048) },
+-    //    { CODEC_ID_SONIC_LS, },
+-    //    { CODEC_ID_FLAC, },
+-    { CODEC_ID_MP3ADU, BGAV_MK_FOURCC('r', 'm', 'p', '3') },
+-    { CODEC_ID_MP3ON4, BGAV_MK_FOURCC('m', '4', 'a', 29) },
+-    { CODEC_ID_SHORTEN, BGAV_MK_FOURCC('.','s','h','n')},
+-    { CODEC_ID_ALAC, BGAV_MK_FOURCC('a', 'l', 'a', 'c') },
+-    { CODEC_ID_WESTWOOD_SND1, BGAV_MK_FOURCC('w','s','p','1') },
+-    { CODEC_ID_GSM, BGAV_MK_FOURCC('a', 'g', 's', 'm') }, /* as in Berlin toast format */
+-    { CODEC_ID_QDM2, BGAV_MK_FOURCC('Q', 'D', 'M', '2') },
+-    { CODEC_ID_COOK, BGAV_MK_FOURCC('c', 'o', 'o', 'k') },
+-    { CODEC_ID_TRUESPEECH, BGAV_WAVID_2_FOURCC(0x0022) },
+-    { CODEC_ID_TTA, BGAV_MK_FOURCC('T', 'T', 'A', '1')  },
+-    { CODEC_ID_SMACKAUDIO, BGAV_MK_FOURCC('S','M','K','A') },
+-    //    { CODEC_ID_QCELP, },
++    { AV_CODEC_ID_MP2, BGAV_MK_FOURCC('.','m','p','2') },
++    { AV_CODEC_ID_MP3, BGAV_MK_FOURCC('.','m','p','3') }, /* preferred ID for decoding MPEG audio layer 1, }, 2 or 3 */
++    { AV_CODEC_ID_AAC, BGAV_MK_FOURCC('a','a','c',' ') },
++    { AV_CODEC_ID_AC3, BGAV_MK_FOURCC('.', 'a', 'c', '3') },
++    { AV_CODEC_ID_DTS, BGAV_MK_FOURCC('d', 't', 's', ' ') },
++    //    { AV_CODEC_ID_VORBIS, },
++    //    { AV_CODEC_ID_DVAUDIO, },
++    { AV_CODEC_ID_WMAV1, BGAV_WAVID_2_FOURCC(0x160) },
++    { AV_CODEC_ID_WMAV2, BGAV_WAVID_2_FOURCC(0x161) },
++    { AV_CODEC_ID_MACE3, BGAV_MK_FOURCC('M', 'A', 'C', '3') },
++    { AV_CODEC_ID_MACE6, BGAV_MK_FOURCC('M', 'A', 'C', '6') },
++    { AV_CODEC_ID_VMDAUDIO, BGAV_MK_FOURCC('V', 'M', 'D', 'A')},
++    { AV_CODEC_ID_SONIC, BGAV_WAVID_2_FOURCC(0x2048) },
++    //    { AV_CODEC_ID_SONIC_LS, },
++    //    { AV_CODEC_ID_FLAC, },
++    { AV_CODEC_ID_MP3ADU, BGAV_MK_FOURCC('r', 'm', 'p', '3') },
++    { AV_CODEC_ID_MP3ON4, BGAV_MK_FOURCC('m', '4', 'a', 29) },
++    { AV_CODEC_ID_SHORTEN, BGAV_MK_FOURCC('.','s','h','n')},
++    { AV_CODEC_ID_ALAC, BGAV_MK_FOURCC('a', 'l', 'a', 'c') },
++    { AV_CODEC_ID_WESTWOOD_SND1, BGAV_MK_FOURCC('w','s','p','1') },
++    { AV_CODEC_ID_GSM, BGAV_MK_FOURCC('a', 'g', 's', 'm') }, /* as in Berlin toast format */
++    { AV_CODEC_ID_QDM2, BGAV_MK_FOURCC('Q', 'D', 'M', '2') },
++    { AV_CODEC_ID_COOK, BGAV_MK_FOURCC('c', 'o', 'o', 'k') },
++    { AV_CODEC_ID_TRUESPEECH, BGAV_WAVID_2_FOURCC(0x0022) },
++    { AV_CODEC_ID_TTA, BGAV_MK_FOURCC('T', 'T', 'A', '1')  },
++    { AV_CODEC_ID_SMACKAUDIO, BGAV_MK_FOURCC('S','M','K','A') },
++    //    { AV_CODEC_ID_QCELP, },
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(16<<8)+0)
+-    { CODEC_ID_WAVPACK, BGAV_MK_FOURCC('w', 'v', 'p', 'k') },
++    { AV_CODEC_ID_WAVPACK, BGAV_MK_FOURCC('w', 'v', 'p', 'k') },
+ #endif
+ 
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(18<<8)+0)
+-    { CODEC_ID_DSICINAUDIO, BGAV_MK_FOURCC('d', 'c', 'i', 'n') },
++    { AV_CODEC_ID_DSICINAUDIO, BGAV_MK_FOURCC('d', 'c', 'i', 'n') },
+ #endif
+ 
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(23<<8)+0)
+-    { CODEC_ID_IMC, BGAV_WAVID_2_FOURCC(0x0401) },
++    { AV_CODEC_ID_IMC, BGAV_WAVID_2_FOURCC(0x0401) },
+ #endif
+-    //    { CODEC_ID_MUSEPACK7, },
+-    //    { CODEC_ID_MLP, },
+-    { CODEC_ID_MLP, BGAV_MK_FOURCC('.', 'm', 'l', 'p') },
++    //    { AV_CODEC_ID_MUSEPACK7, },
++    //    { AV_CODEC_ID_MLP, },
++    { AV_CODEC_ID_MLP, BGAV_MK_FOURCC('.', 'm', 'l', 'p') },
+     
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(34<<8)+0)
+-    { CODEC_ID_GSM_MS, BGAV_WAVID_2_FOURCC(0x31) }, /* as found in WAV */
++    { AV_CODEC_ID_GSM_MS, BGAV_WAVID_2_FOURCC(0x31) }, /* as found in WAV */
+ #endif
+ 
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(40<<8)+4)
+-    { CODEC_ID_ATRAC3, BGAV_MK_FOURCC('a', 't', 'r', 'c') },
++    { AV_CODEC_ID_ATRAC3, BGAV_MK_FOURCC('a', 't', 'r', 'c') },
+ #endif
+-    //    { CODEC_ID_VOXWARE, },
++    //    { AV_CODEC_ID_VOXWARE, },
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(44<<8)+0)
+-    { CODEC_ID_APE, BGAV_MK_FOURCC('.', 'a', 'p', 'e')},
++    { AV_CODEC_ID_APE, BGAV_MK_FOURCC('.', 'a', 'p', 'e')},
+ #endif
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(46<<8)+0)
+-    { CODEC_ID_NELLYMOSER, BGAV_MK_FOURCC('N', 'E', 'L', 'L')},
++    { AV_CODEC_ID_NELLYMOSER, BGAV_MK_FOURCC('N', 'E', 'L', 'L')},
+ #endif
+-    //    { CODEC_ID_MUSEPACK8, },
++    //    { AV_CODEC_ID_MUSEPACK8, },
+     
+     { /* End */ }
+   };
+@@ -354,146 +354,146 @@
+ static video_codec_map_t video_codecs[] =
+   {
+ 
+-    { CODEC_ID_MPEG1VIDEO, BGAV_MK_FOURCC('m','p','g','v') },
+-    { CODEC_ID_MPEG2VIDEO, BGAV_MK_FOURCC('m','p','g','v') }, /* preferred ID for MPEG-1/2 video decoding */
+-    //    { CODEC_ID_MPEG2VIDEO_XVMC, },
+-    { CODEC_ID_H261, BGAV_MK_FOURCC('h', '2', '6', '1') },
+-    { CODEC_ID_H263, BGAV_MK_FOURCC('h', '2', '6', '3') },
+-    //    { CODEC_ID_RV10, },
+-    //    { CODEC_ID_RV20, },
+-    { CODEC_ID_MJPEG, BGAV_MK_FOURCC('j', 'p', 'e', 'g') },
+-    { CODEC_ID_MJPEGB, BGAV_MK_FOURCC('m', 'j', 'p', 'b')},
+-    { CODEC_ID_LJPEG, BGAV_MK_FOURCC('L', 'J', 'P', 'G') },
+-    //    { CODEC_ID_SP5X, },
+-    { CODEC_ID_JPEGLS, BGAV_MK_FOURCC('M', 'J', 'L', 'S') },
+-    { CODEC_ID_MPEG4, BGAV_MK_FOURCC('m', 'p', '4', 'v') },
+-    //    { CODEC_ID_RAWVIDEO, },
+-    { CODEC_ID_MSMPEG4V1, BGAV_MK_FOURCC('M', 'P', 'G', '4') },
+-    { CODEC_ID_MSMPEG4V2, BGAV_MK_FOURCC('D', 'I', 'V', '2') },
+-    { CODEC_ID_MSMPEG4V3, BGAV_MK_FOURCC('D', 'I', 'V', '3')},
+-    { CODEC_ID_WMV1, MKTAG('W', 'M', 'V', '1') },
+-    { CODEC_ID_WMV2, MKTAG('W', 'M', 'V', '2') },
+-    { CODEC_ID_H263P, MKTAG('H', '2', '6', '3') },
+-    { CODEC_ID_H263I, MKTAG('I', '2', '6', '3') },
+-    { CODEC_ID_FLV1, BGAV_MK_FOURCC('F', 'L', 'V', '1') },
+-    { CODEC_ID_SVQ1, BGAV_MK_FOURCC('S', 'V', 'Q', '1') },
+-    { CODEC_ID_SVQ3, BGAV_MK_FOURCC('S', 'V', 'Q', '3') },
+-    { CODEC_ID_DVVIDEO, BGAV_MK_FOURCC('d', 'v', 's', 'd') },
+-    { CODEC_ID_HUFFYUV, BGAV_MK_FOURCC('H', 'F', 'Y', 'U') },
+-    { CODEC_ID_CYUV, BGAV_MK_FOURCC('C', 'Y', 'U', 'V') },
+-    { CODEC_ID_H264, BGAV_MK_FOURCC('H', '2', '6', '4') },
+-    { CODEC_ID_INDEO3, BGAV_MK_FOURCC('i', 'v', '3', '2') },
+-    { CODEC_ID_VP3, BGAV_MK_FOURCC('V', 'P', '3', '1') },
+-    { CODEC_ID_THEORA, BGAV_MK_FOURCC('T', 'H', 'R', 'A') },
+-    { CODEC_ID_ASV1, BGAV_MK_FOURCC('A', 'S', 'V', '1') },
+-    { CODEC_ID_ASV2, BGAV_MK_FOURCC('A', 'S', 'V', '2') },
+-    { CODEC_ID_FFV1, BGAV_MK_FOURCC('F', 'F', 'V', '1') },
+-    { CODEC_ID_4XM, BGAV_MK_FOURCC('4', 'X', 'M', 'V') },
+-    { CODEC_ID_VCR1, BGAV_MK_FOURCC('V', 'C', 'R', '1') },
+-    { CODEC_ID_CLJR, BGAV_MK_FOURCC('C', 'L', 'J', 'R') },
+-    { CODEC_ID_MDEC, BGAV_MK_FOURCC('M', 'D', 'E', 'C') },
+-    { CODEC_ID_ROQ, BGAV_MK_FOURCC('R', 'O', 'Q', 'V') },
+-    { CODEC_ID_INTERPLAY_VIDEO, BGAV_MK_FOURCC('I', 'P', 'V', 'D') },
+-    //    { CODEC_ID_XAN_WC3, },
+-    //    { CODEC_ID_XAN_WC4, },
+-    { CODEC_ID_RPZA, BGAV_MK_FOURCC('r', 'p', 'z', 'a') },
+-    { CODEC_ID_CINEPAK, BGAV_MK_FOURCC('c', 'v', 'i', 'd') },
+-    { CODEC_ID_WS_VQA, BGAV_MK_FOURCC('W', 'V', 'Q', 'A') },
+-    { CODEC_ID_MSRLE, BGAV_MK_FOURCC('W', 'R', 'L', 'E') },
+-    { CODEC_ID_MSVIDEO1, BGAV_MK_FOURCC('M', 'S', 'V', 'C') },
+-    { CODEC_ID_IDCIN, BGAV_MK_FOURCC('I', 'D', 'C', 'I') },
+-    { CODEC_ID_8BPS, BGAV_MK_FOURCC('8', 'B', 'P', 'S') },
+-    { CODEC_ID_SMC, BGAV_MK_FOURCC('s', 'm', 'c', ' ')},
+-    { CODEC_ID_FLIC, BGAV_MK_FOURCC('F', 'L', 'I', 'C') },
+-    { CODEC_ID_TRUEMOTION1, BGAV_MK_FOURCC('D', 'U', 'C', 'K') },
+-    { CODEC_ID_VMDVIDEO, BGAV_MK_FOURCC('V', 'M', 'D', 'V') },
+-    { CODEC_ID_MSZH, BGAV_MK_FOURCC('M', 'S', 'Z', 'H') },
+-    { CODEC_ID_ZLIB, BGAV_MK_FOURCC('Z', 'L', 'I', 'B') },
+-    { CODEC_ID_QTRLE, BGAV_MK_FOURCC('r', 'l', 'e', ' ') },
+-    { CODEC_ID_SNOW, BGAV_MK_FOURCC('S', 'N', 'O', 'W') },
+-    { CODEC_ID_TSCC, BGAV_MK_FOURCC('T', 'S', 'C', 'C') },
+-    { CODEC_ID_ULTI, BGAV_MK_FOURCC('U', 'L', 'T', 'I') },
+-    { CODEC_ID_QDRAW, BGAV_MK_FOURCC('q', 'd', 'r', 'w') },
+-    { CODEC_ID_VIXL, BGAV_MK_FOURCC('V', 'I', 'X', 'L') },
+-    { CODEC_ID_QPEG, BGAV_MK_FOURCC('Q', '1', '.', '1') },
+-    //    { CODEC_ID_XVID, },
+-    { CODEC_ID_PNG, BGAV_MK_FOURCC('p', 'n', 'g', ' ') },
+-    //    { CODEC_ID_PPM, },
+-    //    { CODEC_ID_PBM, },
+-    //    { CODEC_ID_PGM, },
+-    //    { CODEC_ID_PGMYUV, },
+-    //    { CODEC_ID_PAM, },
+-    { CODEC_ID_FFVHUFF, BGAV_MK_FOURCC('F', 'F', 'V', 'H') },
+-    { CODEC_ID_RV30,    BGAV_MK_FOURCC('R', 'V', '3', '0') },
+-    { CODEC_ID_RV40,    BGAV_MK_FOURCC('R', 'V', '4', '0') },
+-    { CODEC_ID_VC1,     BGAV_MK_FOURCC('V', 'C', '-', '1') },
+-    { CODEC_ID_WMV3, BGAV_MK_FOURCC('W', 'M', 'V', '3') },
+-    { CODEC_ID_LOCO, BGAV_MK_FOURCC('L', 'O', 'C', 'O') },
+-    { CODEC_ID_WNV1, BGAV_MK_FOURCC('W', 'N', 'V', '1') },
+-    { CODEC_ID_AASC, BGAV_MK_FOURCC('A', 'A', 'S', 'C') },
+-    { CODEC_ID_INDEO2, BGAV_MK_FOURCC('R', 'T', '2', '1') },
+-    { CODEC_ID_FRAPS, BGAV_MK_FOURCC('F', 'P', 'S', '1') },
+-    { CODEC_ID_TRUEMOTION2, BGAV_MK_FOURCC('T', 'M', '2', '0') },
+-    //    { CODEC_ID_BMP, },
+-    { CODEC_ID_CSCD, BGAV_MK_FOURCC('C', 'S', 'C', 'D') },
+-    { CODEC_ID_MMVIDEO, BGAV_MK_FOURCC('M', 'M', 'V', 'D')},
+-    { CODEC_ID_ZMBV, BGAV_MK_FOURCC('Z', 'M', 'B', 'V') },
+-    { CODEC_ID_AVS, BGAV_MK_FOURCC('A', 'V', 'S', ' ') },
+-    { CODEC_ID_SMACKVIDEO, BGAV_MK_FOURCC('S', 'M', 'K', '2') },
+-    { CODEC_ID_NUV, BGAV_MK_FOURCC('R', 'J', 'P', 'G') },
+-    { CODEC_ID_KMVC, BGAV_MK_FOURCC('K', 'M', 'V', 'C') },
+-    { CODEC_ID_FLASHSV, BGAV_MK_FOURCC('F', 'L', 'V', 'S') },
++    { AV_CODEC_ID_MPEG1VIDEO, BGAV_MK_FOURCC('m','p','g','v') },
++    { AV_CODEC_ID_MPEG2VIDEO, BGAV_MK_FOURCC('m','p','g','v') }, /* preferred ID for MPEG-1/2 video decoding */
++    //    { AV_CODEC_ID_MPEG2VIDEO_XVMC, },
++    { AV_CODEC_ID_H261, BGAV_MK_FOURCC('h', '2', '6', '1') },
++    { AV_CODEC_ID_H263, BGAV_MK_FOURCC('h', '2', '6', '3') },
++    //    { AV_CODEC_ID_RV10, },
++    //    { AV_CODEC_ID_RV20, },
++    { AV_CODEC_ID_MJPEG, BGAV_MK_FOURCC('j', 'p', 'e', 'g') },
++    { AV_CODEC_ID_MJPEGB, BGAV_MK_FOURCC('m', 'j', 'p', 'b')},
++    { AV_CODEC_ID_LJPEG, BGAV_MK_FOURCC('L', 'J', 'P', 'G') },
++    //    { AV_CODEC_ID_SP5X, },
++    { AV_CODEC_ID_JPEGLS, BGAV_MK_FOURCC('M', 'J', 'L', 'S') },
++    { AV_CODEC_ID_MPEG4, BGAV_MK_FOURCC('m', 'p', '4', 'v') },
++    //    { AV_CODEC_ID_RAWVIDEO, },
++    { AV_CODEC_ID_MSMPEG4V1, BGAV_MK_FOURCC('M', 'P', 'G', '4') },
++    { AV_CODEC_ID_MSMPEG4V2, BGAV_MK_FOURCC('D', 'I', 'V', '2') },
++    { AV_CODEC_ID_MSMPEG4V3, BGAV_MK_FOURCC('D', 'I', 'V', '3')},
++    { AV_CODEC_ID_WMV1, MKTAG('W', 'M', 'V', '1') },
++    { AV_CODEC_ID_WMV2, MKTAG('W', 'M', 'V', '2') },
++    { AV_CODEC_ID_H263P, MKTAG('H', '2', '6', '3') },
++    { AV_CODEC_ID_H263I, MKTAG('I', '2', '6', '3') },
++    { AV_CODEC_ID_FLV1, BGAV_MK_FOURCC('F', 'L', 'V', '1') },
++    { AV_CODEC_ID_SVQ1, BGAV_MK_FOURCC('S', 'V', 'Q', '1') },
++    { AV_CODEC_ID_SVQ3, BGAV_MK_FOURCC('S', 'V', 'Q', '3') },
++    { AV_CODEC_ID_DVVIDEO, BGAV_MK_FOURCC('d', 'v', 's', 'd') },
++    { AV_CODEC_ID_HUFFYUV, BGAV_MK_FOURCC('H', 'F', 'Y', 'U') },
++    { AV_CODEC_ID_CYUV, BGAV_MK_FOURCC('C', 'Y', 'U', 'V') },
++    { AV_CODEC_ID_H264, BGAV_MK_FOURCC('H', '2', '6', '4') },
++    { AV_CODEC_ID_INDEO3, BGAV_MK_FOURCC('i', 'v', '3', '2') },
++    { AV_CODEC_ID_VP3, BGAV_MK_FOURCC('V', 'P', '3', '1') },
++    { AV_CODEC_ID_THEORA, BGAV_MK_FOURCC('T', 'H', 'R', 'A') },
++    { AV_CODEC_ID_ASV1, BGAV_MK_FOURCC('A', 'S', 'V', '1') },
++    { AV_CODEC_ID_ASV2, BGAV_MK_FOURCC('A', 'S', 'V', '2') },
++    { AV_CODEC_ID_FFV1, BGAV_MK_FOURCC('F', 'F', 'V', '1') },
++    { AV_CODEC_ID_4XM, BGAV_MK_FOURCC('4', 'X', 'M', 'V') },
++    { AV_CODEC_ID_VCR1, BGAV_MK_FOURCC('V', 'C', 'R', '1') },
++    { AV_CODEC_ID_CLJR, BGAV_MK_FOURCC('C', 'L', 'J', 'R') },
++    { AV_CODEC_ID_MDEC, BGAV_MK_FOURCC('M', 'D', 'E', 'C') },
++    { AV_CODEC_ID_ROQ, BGAV_MK_FOURCC('R', 'O', 'Q', 'V') },
++    { AV_CODEC_ID_INTERPLAY_VIDEO, BGAV_MK_FOURCC('I', 'P', 'V', 'D') },
++    //    { AV_CODEC_ID_XAN_WC3, },
++    //    { AV_CODEC_ID_XAN_WC4, },
++    { AV_CODEC_ID_RPZA, BGAV_MK_FOURCC('r', 'p', 'z', 'a') },
++    { AV_CODEC_ID_CINEPAK, BGAV_MK_FOURCC('c', 'v', 'i', 'd') },
++    { AV_CODEC_ID_WS_VQA, BGAV_MK_FOURCC('W', 'V', 'Q', 'A') },
++    { AV_CODEC_ID_MSRLE, BGAV_MK_FOURCC('W', 'R', 'L', 'E') },
++    { AV_CODEC_ID_MSVIDEO1, BGAV_MK_FOURCC('M', 'S', 'V', 'C') },
++    { AV_CODEC_ID_IDCIN, BGAV_MK_FOURCC('I', 'D', 'C', 'I') },
++    { AV_CODEC_ID_8BPS, BGAV_MK_FOURCC('8', 'B', 'P', 'S') },
++    { AV_CODEC_ID_SMC, BGAV_MK_FOURCC('s', 'm', 'c', ' ')},
++    { AV_CODEC_ID_FLIC, BGAV_MK_FOURCC('F', 'L', 'I', 'C') },
++    { AV_CODEC_ID_TRUEMOTION1, BGAV_MK_FOURCC('D', 'U', 'C', 'K') },
++    { AV_CODEC_ID_VMDVIDEO, BGAV_MK_FOURCC('V', 'M', 'D', 'V') },
++    { AV_CODEC_ID_MSZH, BGAV_MK_FOURCC('M', 'S', 'Z', 'H') },
++    { AV_CODEC_ID_ZLIB, BGAV_MK_FOURCC('Z', 'L', 'I', 'B') },
++    { AV_CODEC_ID_QTRLE, BGAV_MK_FOURCC('r', 'l', 'e', ' ') },
++    { AV_CODEC_ID_SNOW, BGAV_MK_FOURCC('S', 'N', 'O', 'W') },
++    { AV_CODEC_ID_TSCC, BGAV_MK_FOURCC('T', 'S', 'C', 'C') },
++    { AV_CODEC_ID_ULTI, BGAV_MK_FOURCC('U', 'L', 'T', 'I') },
++    { AV_CODEC_ID_QDRAW, BGAV_MK_FOURCC('q', 'd', 'r', 'w') },
++    { AV_CODEC_ID_VIXL, BGAV_MK_FOURCC('V', 'I', 'X', 'L') },
++    { AV_CODEC_ID_QPEG, BGAV_MK_FOURCC('Q', '1', '.', '1') },
++    //    { AV_CODEC_ID_XVID, },
++    { AV_CODEC_ID_PNG, BGAV_MK_FOURCC('p', 'n', 'g', ' ') },
++    //    { AV_CODEC_ID_PPM, },
++    //    { AV_CODEC_ID_PBM, },
++    //    { AV_CODEC_ID_PGM, },
++    //    { AV_CODEC_ID_PGMYUV, },
++    //    { AV_CODEC_ID_PAM, },
++    { AV_CODEC_ID_FFVHUFF, BGAV_MK_FOURCC('F', 'F', 'V', 'H') },
++    { AV_CODEC_ID_RV30,    BGAV_MK_FOURCC('R', 'V', '3', '0') },
++    { AV_CODEC_ID_RV40,    BGAV_MK_FOURCC('R', 'V', '4', '0') },
++    { AV_CODEC_ID_VC1,     BGAV_MK_FOURCC('V', 'C', '-', '1') },
++    { AV_CODEC_ID_WMV3, BGAV_MK_FOURCC('W', 'M', 'V', '3') },
++    { AV_CODEC_ID_LOCO, BGAV_MK_FOURCC('L', 'O', 'C', 'O') },
++    { AV_CODEC_ID_WNV1, BGAV_MK_FOURCC('W', 'N', 'V', '1') },
++    { AV_CODEC_ID_AASC, BGAV_MK_FOURCC('A', 'A', 'S', 'C') },
++    { AV_CODEC_ID_INDEO2, BGAV_MK_FOURCC('R', 'T', '2', '1') },
++    { AV_CODEC_ID_FRAPS, BGAV_MK_FOURCC('F', 'P', 'S', '1') },
++    { AV_CODEC_ID_TRUEMOTION2, BGAV_MK_FOURCC('T', 'M', '2', '0') },
++    //    { AV_CODEC_ID_BMP, },
++    { AV_CODEC_ID_CSCD, BGAV_MK_FOURCC('C', 'S', 'C', 'D') },
++    { AV_CODEC_ID_MMVIDEO, BGAV_MK_FOURCC('M', 'M', 'V', 'D')},
++    { AV_CODEC_ID_ZMBV, BGAV_MK_FOURCC('Z', 'M', 'B', 'V') },
++    { AV_CODEC_ID_AVS, BGAV_MK_FOURCC('A', 'V', 'S', ' ') },
++    { AV_CODEC_ID_SMACKVIDEO, BGAV_MK_FOURCC('S', 'M', 'K', '2') },
++    { AV_CODEC_ID_NUV, BGAV_MK_FOURCC('R', 'J', 'P', 'G') },
++    { AV_CODEC_ID_KMVC, BGAV_MK_FOURCC('K', 'M', 'V', 'C') },
++    { AV_CODEC_ID_FLASHSV, BGAV_MK_FOURCC('F', 'L', 'V', 'S') },
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(11<<8)+0)
+-    { CODEC_ID_CAVS, BGAV_MK_FOURCC('C', 'A', 'V', 'S') },
++    { AV_CODEC_ID_CAVS, BGAV_MK_FOURCC('C', 'A', 'V', 'S') },
+ #endif
+-    //    { CODEC_ID_JPEG2000, },
++    //    { AV_CODEC_ID_JPEG2000, },
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(13<<8)+0)
+-    { CODEC_ID_VMNC, BGAV_MK_FOURCC('V', 'M', 'n', 'c') },
++    { AV_CODEC_ID_VMNC, BGAV_MK_FOURCC('V', 'M', 'n', 'c') },
+ #endif
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(14<<8)+0)    
+-    { CODEC_ID_VP5, BGAV_MK_FOURCC('V', 'P', '5', '0') },
+-    { CODEC_ID_VP6, BGAV_MK_FOURCC('V', 'P', '6', '0') },
++    { AV_CODEC_ID_VP5, BGAV_MK_FOURCC('V', 'P', '5', '0') },
++    { AV_CODEC_ID_VP6, BGAV_MK_FOURCC('V', 'P', '6', '0') },
+ #endif
+-    //    { CODEC_ID_VP6F, },
++    //    { AV_CODEC_ID_VP6F, },
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(17<<8)+0)
+-    { CODEC_ID_TARGA, BGAV_MK_FOURCC('t', 'g', 'a', ' ') },
++    { AV_CODEC_ID_TARGA, BGAV_MK_FOURCC('t', 'g', 'a', ' ') },
+ #endif
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(18<<8)+0)
+-    { CODEC_ID_DSICINVIDEO, BGAV_MK_FOURCC('d', 'c', 'i', 'n') },
++    { AV_CODEC_ID_DSICINVIDEO, BGAV_MK_FOURCC('d', 'c', 'i', 'n') },
+ #endif
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(19<<8)+0)
+-    { CODEC_ID_TIERTEXSEQVIDEO, BGAV_MK_FOURCC('T', 'I', 'T', 'X') },
++    { AV_CODEC_ID_TIERTEXSEQVIDEO, BGAV_MK_FOURCC('T', 'I', 'T', 'X') },
+ #endif
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(20<<8)+0)
+-    { CODEC_ID_TIFF, BGAV_MK_FOURCC('t', 'i', 'f', 'f') },
++    { AV_CODEC_ID_TIFF, BGAV_MK_FOURCC('t', 'i', 'f', 'f') },
+ #endif
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(21<<8)+0)
+-    { CODEC_ID_GIF, BGAV_MK_FOURCC('g', 'i', 'f', ' ') },
++    { AV_CODEC_ID_GIF, BGAV_MK_FOURCC('g', 'i', 'f', ' ') },
+ #endif
+-    //    { CODEC_ID_FFH264, },
++    //    { AV_CODEC_ID_FFH264, },
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(39<<8)+0)
+-    { CODEC_ID_DXA, BGAV_MK_FOURCC('D', 'X', 'A', ' ') },
++    { AV_CODEC_ID_DXA, BGAV_MK_FOURCC('D', 'X', 'A', ' ') },
+ #endif
+-    //    { CODEC_ID_DNXHD, },
++    //    { AV_CODEC_ID_DNXHD, },
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(40<<8)+3)
+-    { CODEC_ID_THP, BGAV_MK_FOURCC('T', 'H', 'P', 'V') },
++    { AV_CODEC_ID_THP, BGAV_MK_FOURCC('T', 'H', 'P', 'V') },
+ #endif
+-    //    { CODEC_ID_SGI, },
++    //    { AV_CODEC_ID_SGI, },
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(40<<8)+3)
+-    { CODEC_ID_C93, BGAV_MK_FOURCC('C','9','3','V') },
++    { AV_CODEC_ID_C93, BGAV_MK_FOURCC('C','9','3','V') },
+ #endif
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(40<<8)+3)
+-    { CODEC_ID_BETHSOFTVID, BGAV_MK_FOURCC('B','S','D','V')},
++    { AV_CODEC_ID_BETHSOFTVID, BGAV_MK_FOURCC('B','S','D','V')},
+ #endif
+-    //    { CODEC_ID_PTX, },
+-    //    { CODEC_ID_TXD, },
++    //    { AV_CODEC_ID_PTX, },
++    //    { AV_CODEC_ID_TXD, },
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(45<<8)+0)
+-    { CODEC_ID_VP6A, BGAV_MK_FOURCC('V','P','6','A') },
++    { AV_CODEC_ID_VP6A, BGAV_MK_FOURCC('V','P','6','A') },
+ #endif
+-    //    { CODEC_ID_AMV, },
++    //    { AV_CODEC_ID_AMV, },
+ 
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(47<<8)+0)
+-    { CODEC_ID_VB, BGAV_MK_FOURCC('V','B','V','1') },
++    { AV_CODEC_ID_VB, BGAV_MK_FOURCC('V','B','V','1') },
+ #endif
+     
+     { /* End */ }
+diff -ur gmerlin-avdecoder-1.2.0.orig/lib/video_ffmpeg.c gmerlin-avdecoder-1.2.0/lib/video_ffmpeg.c
+--- gmerlin-avdecoder-1.2.0.orig/lib/video_ffmpeg.c	2016-04-04 21:44:50.568259977 +0900
++++ gmerlin-avdecoder-1.2.0/lib/video_ffmpeg.c	2016-04-04 21:52:36.181180442 +0900
+@@ -117,7 +117,7 @@
+     
+   /* Pixelformat */
+   int do_convert;
+-  enum PixelFormat dst_format;
++  enum AVPixelFormat dst_format;
+ 
+   /* Real video ugliness */
+ 
+@@ -273,7 +273,7 @@
+                                     state->bitstream_buffers);
+   }
+ 
+-static enum PixelFormat vdpau_get_format(struct AVCodecContext *s, const enum PixelFormat *fmt)
++static enum AVPixelFormat vdpau_get_format(struct AVCodecContext *s, const enum AVPixelFormat *fmt)
+   {
+   return *fmt;
+   }
+@@ -440,7 +440,7 @@
+         frame_buffer_len = p->data_size;
+       }
+     /* DV Video ugliness */
+-    if(priv->info->ffmpeg_id == CODEC_ID_DVVIDEO)
++    if(priv->info->ffmpeg_id == AV_CODEC_ID_DVVIDEO)
+       {
+       handle_dv(s, p);
+       }
+@@ -699,7 +699,7 @@
+   {
+   AVCodec * ret = NULL;
+ 
+-  if(s->opt->vdpau && (id == CODEC_ID_H264) && (s->fourcc != BGAV_MK_FOURCC('a', 'v', 'c', '1')) &&
++  if(s->opt->vdpau && (id == AV_CODEC_ID_H264) && (s->fourcc != BGAV_MK_FOURCC('a', 'v', 'c', '1')) &&
+      s->ext_size)
+     ret = avcodec_find_decoder_by_name("h264_vdpau");
+   
+@@ -756,20 +756,20 @@
+   /* Create video decoder */
+   switch(id)
+     {
+-    case CODEC_ID_H264:
++    case AV_CODEC_ID_H264:
+       profile = VDP_DECODER_PROFILE_H264_HIGH;
+       // fprintf(stderr, "max references: %d\n", max_references);
+       break;
+-    case CODEC_ID_MPEG1VIDEO:
++    case AV_CODEC_ID_MPEG1VIDEO:
+       profile = VDP_DECODER_PROFILE_MPEG1;
+       break;
+-    case CODEC_ID_MPEG2VIDEO:
++    case AV_CODEC_ID_MPEG2VIDEO:
+       profile = VDP_DECODER_PROFILE_MPEG2_MAIN;
+       break;
+-    case CODEC_ID_WMV3:
++    case AV_CODEC_ID_WMV3:
+       profile = VDP_DECODER_PROFILE_VC1_MAIN;
+       break;
+-    case CODEC_ID_VC1:
++    case AV_CODEC_ID_VC1:
+       profile = VDP_DECODER_PROFILE_VC1_ADVANCED;
+       break;
+     default:
+@@ -934,7 +934,7 @@
+   
+   //  bgav_hexdump(s->ext_data, s->ext_size, 16);
+   
+-  priv->frame = avcodec_alloc_frame();
++  priv->frame = av_frame_alloc();
+   priv->gavl_frame = gavl_video_frame_create(NULL);
+   
+   /* Some codecs need extra stuff */
+@@ -1032,7 +1032,7 @@
+     {
+     s->data.video.format.pixelformat = GAVL_YUV_420_P;
+     priv->do_convert = 1;
+-    priv->dst_format = PIX_FMT_YUV420P;
++    priv->dst_format = AV_PIX_FMT_YUV420P;
+ 
+ #ifdef HAVE_LIBSWSCALE
+     priv->swsContext =
+@@ -1149,20 +1149,20 @@
+ static codec_info_t codec_infos[] =
+   {
+ 
+-/*     CODEC_ID_MPEG1VIDEO */
++/*     AV_CODEC_ID_MPEG1VIDEO */
+ #if 0        
+-    { "FFmpeg Mpeg1 decoder", "MPEG-1", CODEC_ID_MPEG1VIDEO,
++    { "FFmpeg Mpeg1 decoder", "MPEG-1", AV_CODEC_ID_MPEG1VIDEO,
+       (uint32_t[]){ BGAV_MK_FOURCC('m', 'p', 'g', '1'), 
+                BGAV_MK_FOURCC('m', 'p', 'g', '2'),
+                BGAV_MK_FOURCC('P', 'I', 'M', '1'), 
+                BGAV_MK_FOURCC('V', 'C', 'R', '2'),
+                0x00 } }, 
+ #endif    
+-/*     CODEC_ID_MPEG2VIDEO, /\* preferred ID for MPEG-1/2 video decoding *\/ */
++/*     AV_CODEC_ID_MPEG2VIDEO, /\* preferred ID for MPEG-1/2 video decoding *\/ */
+ 
+-/*     CODEC_ID_MPEG2VIDEO_XVMC, */
++/*     AV_CODEC_ID_MPEG2VIDEO_XVMC, */
+ 
+-/*     CODEC_ID_H261, */
++/*     AV_CODEC_ID_H261, */
+ #if 0 // http://samples.mplayerhq.hu/V-codecs/h261/h261test.avi: Grey image
+       // http://samples.mplayerhq.hu/V-codecs/h261/lotr.mov: Messed up image then crash
+       // MPlayer can't play these either
+@@ -1170,14 +1170,14 @@
+      * H261 Variants
+      ************************************************************/
+     
+-    { "FFmpeg H261 decoder", "H261", CODEC_ID_H261,
++    { "FFmpeg H261 decoder", "H261", AV_CODEC_ID_H261,
+       (uint32_t[]){ BGAV_MK_FOURCC('H', '2', '6', '1'),
+                BGAV_MK_FOURCC('h', '2', '6', '1'),
+                0x00 } },
+ #endif    
+     
+-    /*     CODEC_ID_H263, */
+-    { "FFmpeg H263 decoder", "H263", CODEC_ID_H263,
++    /*     AV_CODEC_ID_H263, */
++    { "FFmpeg H263 decoder", "H263", AV_CODEC_ID_H263,
+       (uint32_t[]){ BGAV_MK_FOURCC('H', '2', '6', '3'),
+                     BGAV_MK_FOURCC('h', '2', '6', '3'),
+                     BGAV_MK_FOURCC('s', '2', '6', '3'),
+@@ -1186,19 +1186,19 @@
+                     BGAV_MK_FOURCC('v', 'i', 'v', '1'),
+                     0x00 } },
+ 
+-    /*     CODEC_ID_RV10, */
+-    { "FFmpeg Real Video 1.0 decoder", "Real Video 1.0", CODEC_ID_RV10,
++    /*     AV_CODEC_ID_RV10, */
++    { "FFmpeg Real Video 1.0 decoder", "Real Video 1.0", AV_CODEC_ID_RV10,
+       (uint32_t[]){ BGAV_MK_FOURCC('R', 'V', '1', '0'),
+                BGAV_MK_FOURCC('R', 'V', '1', '3'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_RV20, */
+-    { "FFmpeg Real Video 2.0 decoder", "Real Video 2.0", CODEC_ID_RV20,
++    /*     AV_CODEC_ID_RV20, */
++    { "FFmpeg Real Video 2.0 decoder", "Real Video 2.0", AV_CODEC_ID_RV20,
+       (uint32_t[]){ BGAV_MK_FOURCC('R', 'V', '2', '0'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_MJPEG, */
+-    { "FFmpeg motion JPEG decoder", "Motion JPEG", CODEC_ID_MJPEG,
++    /*     AV_CODEC_ID_MJPEG, */
++    { "FFmpeg motion JPEG decoder", "Motion JPEG", AV_CODEC_ID_MJPEG,
+       (uint32_t[]){ BGAV_MK_FOURCC('L', 'J', 'P', 'G'),
+                     BGAV_MK_FOURCC('A', 'V', 'R', 'n'),
+                     BGAV_MK_FOURCC('j', 'p', 'e', 'g'),
+@@ -1215,22 +1215,22 @@
+       get_format_jpeg,
+     },
+     
+-    /*     CODEC_ID_MJPEGB, */
+-    { "FFmpeg motion Jpeg-B decoder", "Motion Jpeg B", CODEC_ID_MJPEGB,
++    /*     AV_CODEC_ID_MJPEGB, */
++    { "FFmpeg motion Jpeg-B decoder", "Motion Jpeg B", AV_CODEC_ID_MJPEGB,
+       (uint32_t[]){ BGAV_MK_FOURCC('m', 'j', 'p', 'b'),
+                     0x00 } },
+     
+-/*     CODEC_ID_LJPEG, */
++/*     AV_CODEC_ID_LJPEG, */
+ 
+-/*     CODEC_ID_SP5X, */
+-    { "FFmpeg SP5X decoder", "SP5X Motion JPEG", CODEC_ID_SP5X,
++/*     AV_CODEC_ID_SP5X, */
++    { "FFmpeg SP5X decoder", "SP5X Motion JPEG", AV_CODEC_ID_SP5X,
+       (uint32_t[]){ BGAV_MK_FOURCC('S', 'P', '5', '4'),
+                0x00 } },
+ 
+-/*     CODEC_ID_JPEGLS, */
++/*     AV_CODEC_ID_JPEGLS, */
+ 
+-/*     CODEC_ID_MPEG4, */
+-    { "FFmpeg MPEG-4 decoder", "MPEG-4", CODEC_ID_MPEG4,
++/*     AV_CODEC_ID_MPEG4, */
++    { "FFmpeg MPEG-4 decoder", "MPEG-4", AV_CODEC_ID_MPEG4,
+       (uint32_t[]){ BGAV_MK_FOURCC('D', 'I', 'V', 'X'),
+                BGAV_MK_FOURCC('d', 'i', 'v', 'x'),
+                BGAV_MK_FOURCC('D', 'X', '5', '0'),
+@@ -1252,26 +1252,26 @@
+                BGAV_MK_FOURCC('F', 'M', 'P', '4'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_RAWVIDEO, */
+-    { "FFmpeg Raw decoder", "Uncompressed", CODEC_ID_RAWVIDEO,
++    /*     AV_CODEC_ID_RAWVIDEO, */
++    { "FFmpeg Raw decoder", "Uncompressed", AV_CODEC_ID_RAWVIDEO,
+       (uint32_t[]){ BGAV_MK_FOURCC('Y', '4', '2', '2'),
+                     BGAV_MK_FOURCC('I', '4', '2', '0'),
+                     0x00 } },
+     
+-    /*     CODEC_ID_MSMPEG4V1, */
+-    { "FFmpeg MSMPEG4V1 decoder", "Microsoft MPEG-4 V1", CODEC_ID_MSMPEG4V1,
++    /*     AV_CODEC_ID_MSMPEG4V1, */
++    { "FFmpeg MSMPEG4V1 decoder", "Microsoft MPEG-4 V1", AV_CODEC_ID_MSMPEG4V1,
+       (uint32_t[]){ BGAV_MK_FOURCC('M', 'P', 'G', '4'),
+                BGAV_MK_FOURCC('D', 'I', 'V', '4'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_MSMPEG4V2, */
+-    { "FFmpeg MSMPEG4V2 decoder", "Microsoft MPEG-4 V2", CODEC_ID_MSMPEG4V2,
++    /*     AV_CODEC_ID_MSMPEG4V2, */
++    { "FFmpeg MSMPEG4V2 decoder", "Microsoft MPEG-4 V2", AV_CODEC_ID_MSMPEG4V2,
+       (uint32_t[]){ BGAV_MK_FOURCC('M', 'P', '4', '2'),
+                BGAV_MK_FOURCC('D', 'I', 'V', '2'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_MSMPEG4V3, */
+-    { "FFmpeg MSMPEG4V3 decoder", "Microsoft MPEG-4 V3", CODEC_ID_MSMPEG4V3,
++    /*     AV_CODEC_ID_MSMPEG4V3, */
++    { "FFmpeg MSMPEG4V3 decoder", "Microsoft MPEG-4 V3", AV_CODEC_ID_MSMPEG4V3,
+       (uint32_t[]){ BGAV_MK_FOURCC('D', 'I', 'V', '3'),
+                BGAV_MK_FOURCC('M', 'P', '4', '3'), 
+                BGAV_MK_FOURCC('M', 'P', 'G', '3'), 
+@@ -1283,42 +1283,42 @@
+                BGAV_MK_FOURCC('C', 'O', 'L', '0'),
+                0x00 } },
+     
+-    /*     CODEC_ID_WMV1, */
+-    { "FFmpeg WMV1 decoder", "Window Media Video 7", CODEC_ID_WMV1,
++    /*     AV_CODEC_ID_WMV1, */
++    { "FFmpeg WMV1 decoder", "Window Media Video 7", AV_CODEC_ID_WMV1,
+       (uint32_t[]){ BGAV_MK_FOURCC('W', 'M', 'V', '1'),
+                0x00 } }, 
+ 
+-    /*     CODEC_ID_WMV2, */
+-    { "FFmpeg WMV2 decoder", "Window Media Video 8", CODEC_ID_WMV2,
++    /*     AV_CODEC_ID_WMV2, */
++    { "FFmpeg WMV2 decoder", "Window Media Video 8", AV_CODEC_ID_WMV2,
+       (uint32_t[]){ BGAV_MK_FOURCC('W', 'M', 'V', '2'),
+                0x00 } }, 
+     
+-    /*     CODEC_ID_H263P, */
++    /*     AV_CODEC_ID_H263P, */
+ 
+-    /*     CODEC_ID_H263I, */
+-    { "FFmpeg H263I decoder", "I263", CODEC_ID_H263I,
++    /*     AV_CODEC_ID_H263I, */
++    { "FFmpeg H263I decoder", "I263", AV_CODEC_ID_H263I,
+       (uint32_t[]){ BGAV_MK_FOURCC('I', '2', '6', '3'), /* intel h263 */
+                0x00 } },
+     
+-    /*     CODEC_ID_FLV1, */
+-    { "FFmpeg Flash video decoder", "Flash Video 1", CODEC_ID_FLV1,
++    /*     AV_CODEC_ID_FLV1, */
++    { "FFmpeg Flash video decoder", "Flash Video 1", AV_CODEC_ID_FLV1,
+       (uint32_t[]){ BGAV_MK_FOURCC('F', 'L', 'V', '1'),
+                     0x00 } },
+ 
+-    /*     CODEC_ID_SVQ1, */
+-    { "FFmpeg Sorenson 1 decoder", "Sorenson Video 1", CODEC_ID_SVQ1,
++    /*     AV_CODEC_ID_SVQ1, */
++    { "FFmpeg Sorenson 1 decoder", "Sorenson Video 1", AV_CODEC_ID_SVQ1,
+       (uint32_t[]){ BGAV_MK_FOURCC('S', 'V', 'Q', '1'),
+                BGAV_MK_FOURCC('s', 'v', 'q', '1'),
+                BGAV_MK_FOURCC('s', 'v', 'q', 'i'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_SVQ3, */
+-    { "FFmpeg Sorenson 3 decoder", "Sorenson Video 3", CODEC_ID_SVQ3,
++    /*     AV_CODEC_ID_SVQ3, */
++    { "FFmpeg Sorenson 3 decoder", "Sorenson Video 3", AV_CODEC_ID_SVQ3,
+       (uint32_t[]){ BGAV_MK_FOURCC('S', 'V', 'Q', '3'),
+                     0x00 } },
+     
+-    /*     CODEC_ID_DVVIDEO, */
+-    { "FFmpeg DV decoder", "DV Video", CODEC_ID_DVVIDEO,
++    /*     AV_CODEC_ID_DVVIDEO, */
++    { "FFmpeg DV decoder", "DV Video", AV_CODEC_ID_DVVIDEO,
+       (uint32_t[]){ BGAV_MK_FOURCC('d', 'v', 's', 'd'), 
+                     BGAV_MK_FOURCC('D', 'V', 'S', 'D'), 
+                     BGAV_MK_FOURCC('d', 'v', 'h', 'd'), 
+@@ -1344,127 +1344,127 @@
+       get_format_dv,
+     },
+     
+-    { "FFmpeg DVCPRO50 decoder", "DVCPRO50 Video", CODEC_ID_DVVIDEO,
++    { "FFmpeg DVCPRO50 decoder", "DVCPRO50 Video", AV_CODEC_ID_DVVIDEO,
+       (uint32_t[]){ BGAV_MK_FOURCC('d', 'v', '5', 'n'),
+                BGAV_MK_FOURCC('d', 'v', '5', 'p'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_HUFFYUV, */
+-    { "FFmpeg Hufyuv decoder", "Huff YUV", CODEC_ID_HUFFYUV,
++    /*     AV_CODEC_ID_HUFFYUV, */
++    { "FFmpeg Hufyuv decoder", "Huff YUV", AV_CODEC_ID_HUFFYUV,
+       (uint32_t[]){ BGAV_MK_FOURCC('H', 'F', 'Y', 'U'),
+                     0x00 } },
+ 
+-    /*     CODEC_ID_CYUV, */
+-    { "FFmpeg Creative YUV decoder", "Creative YUV", CODEC_ID_CYUV,
++    /*     AV_CODEC_ID_CYUV, */
++    { "FFmpeg Creative YUV decoder", "Creative YUV", AV_CODEC_ID_CYUV,
+       (uint32_t[]){ BGAV_MK_FOURCC('C', 'Y', 'U', 'V'),
+                     BGAV_MK_FOURCC('c', 'y', 'u', 'v'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_H264, */
+-    { "FFmpeg H264 decoder", "H264", CODEC_ID_H264,
++    /*     AV_CODEC_ID_H264, */
++    { "FFmpeg H264 decoder", "H264", AV_CODEC_ID_H264,
+       (uint32_t[]){ BGAV_MK_FOURCC('a', 'v', 'c', '1'),
+                BGAV_MK_FOURCC('H', '2', '6', '4'),
+                BGAV_MK_FOURCC('h', '2', '6', '4'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_INDEO3, */
+-    { "FFmpeg Inteo 3 decoder", "Intel Indeo 3", CODEC_ID_INDEO3,
++    /*     AV_CODEC_ID_INDEO3, */
++    { "FFmpeg Inteo 3 decoder", "Intel Indeo 3", AV_CODEC_ID_INDEO3,
+       (uint32_t[]){ BGAV_MK_FOURCC('I', 'V', '3', '1'),
+                     BGAV_MK_FOURCC('I', 'V', '3', '2'),
+                     BGAV_MK_FOURCC('i', 'v', '3', '1'),
+                     BGAV_MK_FOURCC('i', 'v', '3', '2'),
+                     0x00 } },
+ 
+-    /*     CODEC_ID_VP3, */
+-    { "FFmpeg VP3 decoder", "On2 VP3", CODEC_ID_VP3,
++    /*     AV_CODEC_ID_VP3, */
++    { "FFmpeg VP3 decoder", "On2 VP3", AV_CODEC_ID_VP3,
+       (uint32_t[]){ BGAV_MK_FOURCC('V', 'P', '3', '1'),
+                     BGAV_MK_FOURCC('V', 'P', '3', ' '),
+                0x00 } },
+ 
+-    /*     CODEC_ID_THEORA, */
++    /*     AV_CODEC_ID_THEORA, */
+ 
+-    /*     CODEC_ID_ASV1, */
+-    { "FFmpeg ASV1 decoder", "Asus v1", CODEC_ID_ASV1,
++    /*     AV_CODEC_ID_ASV1, */
++    { "FFmpeg ASV1 decoder", "Asus v1", AV_CODEC_ID_ASV1,
+       (uint32_t[]){ BGAV_MK_FOURCC('A', 'S', 'V', '1'),
+                0x00 } },
+     
+-    /*     CODEC_ID_ASV2, */
+-    { "FFmpeg ASV2 decoder", "Asus v2", CODEC_ID_ASV2,
++    /*     AV_CODEC_ID_ASV2, */
++    { "FFmpeg ASV2 decoder", "Asus v2", AV_CODEC_ID_ASV2,
+       (uint32_t[]){ BGAV_MK_FOURCC('A', 'S', 'V', '2'),
+                     0x00 } },
+     
+-    /*     CODEC_ID_FFV1, */
++    /*     AV_CODEC_ID_FFV1, */
+     
+-    { "FFmpeg Video 1 (FFV1) decoder", "FFV1", CODEC_ID_FFV1,
++    { "FFmpeg Video 1 (FFV1) decoder", "FFV1", AV_CODEC_ID_FFV1,
+       (uint32_t[]){ BGAV_MK_FOURCC('F', 'F', 'V', '1'),
+                0x00 } },
+     
+-    /*     CODEC_ID_4XM, */
+-    { "FFmpeg 4XM video decoder", "4XM Video", CODEC_ID_4XM,
++    /*     AV_CODEC_ID_4XM, */
++    { "FFmpeg 4XM video decoder", "4XM Video", AV_CODEC_ID_4XM,
+       (uint32_t[]){ BGAV_MK_FOURCC('4', 'X', 'M', 'V'),
+ 
+                     0x00 } },
+ 
+-    /*     CODEC_ID_VCR1, */
+-    { "FFmpeg VCR1 decoder", "ATI VCR1", CODEC_ID_VCR1,
++    /*     AV_CODEC_ID_VCR1, */
++    { "FFmpeg VCR1 decoder", "ATI VCR1", AV_CODEC_ID_VCR1,
+       (uint32_t[]){ BGAV_MK_FOURCC('V', 'C', 'R', '1'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_CLJR, */
+-    { "FFmpeg CLJR decoder", "Cirrus Logic AccuPak", CODEC_ID_CLJR,
++    /*     AV_CODEC_ID_CLJR, */
++    { "FFmpeg CLJR decoder", "Cirrus Logic AccuPak", AV_CODEC_ID_CLJR,
+       (uint32_t[]){ BGAV_MK_FOURCC('C', 'L', 'J', 'R'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_MDEC, */
+-    { "FFmpeg MPEC video decoder", "Playstation MDEC", CODEC_ID_MDEC,
++    /*     AV_CODEC_ID_MDEC, */
++    { "FFmpeg MPEC video decoder", "Playstation MDEC", AV_CODEC_ID_MDEC,
+       (uint32_t[]){ BGAV_MK_FOURCC('M', 'D', 'E', 'C'),
+                     0x00 } },
+     
+-    /*     CODEC_ID_ROQ, */
+-    { "FFmpeg ID Roq Video Decoder", "ID Roq Video", CODEC_ID_ROQ,
++    /*     AV_CODEC_ID_ROQ, */
++    { "FFmpeg ID Roq Video Decoder", "ID Roq Video", AV_CODEC_ID_ROQ,
+       (uint32_t[]){ BGAV_MK_FOURCC('R', 'O', 'Q', 'V'),
+                     0x00 } },
+ 
+-    /*     CODEC_ID_INTERPLAY_VIDEO, */
+-    { "FFmpeg Interplay Video Decoder", "Interplay Video", CODEC_ID_INTERPLAY_VIDEO,
++    /*     AV_CODEC_ID_INTERPLAY_VIDEO, */
++    { "FFmpeg Interplay Video Decoder", "Interplay Video", AV_CODEC_ID_INTERPLAY_VIDEO,
+       (uint32_t[]){ BGAV_MK_FOURCC('I', 'P', 'V', 'D'),
+                     0x00 } },
+     
+-    /*     CODEC_ID_XAN_WC3, */
++    /*     AV_CODEC_ID_XAN_WC3, */
+     
+-    /*     CODEC_ID_XAN_WC4, */
++    /*     AV_CODEC_ID_XAN_WC4, */
+ #if 0 /* Commented out in libavcodec as well */
+-    { "FFmpeg Xxan decoder", "Xan/WC3", CODEC_ID_XAN_WC4,
++    { "FFmpeg Xxan decoder", "Xan/WC3", AV_CODEC_ID_XAN_WC4,
+       (uint32_t[]){ BGAV_MK_FOURCC('X', 'x', 'a', 'n'),
+                0x00 } },
+ #endif
+ 
+-    /*     CODEC_ID_RPZA, */
++    /*     AV_CODEC_ID_RPZA, */
+     
+-    { "FFmpeg rpza decoder", "Apple Video", CODEC_ID_RPZA,
++    { "FFmpeg rpza decoder", "Apple Video", AV_CODEC_ID_RPZA,
+       (uint32_t[]){ BGAV_MK_FOURCC('r', 'p', 'z', 'a'),
+                BGAV_MK_FOURCC('a', 'z', 'p', 'r'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_CINEPAK, */
+-    { "FFmpeg cinepak decoder", "Cinepak", CODEC_ID_CINEPAK,
++    /*     AV_CODEC_ID_CINEPAK, */
++    { "FFmpeg cinepak decoder", "Cinepak", AV_CODEC_ID_CINEPAK,
+       (uint32_t[]){ BGAV_MK_FOURCC('c', 'v', 'i', 'd'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_WS_VQA, */
+-    { "FFmpeg Westwood VQA decoder", "Westwood VQA", CODEC_ID_WS_VQA,
++    /*     AV_CODEC_ID_WS_VQA, */
++    { "FFmpeg Westwood VQA decoder", "Westwood VQA", AV_CODEC_ID_WS_VQA,
+       (uint32_t[]){ BGAV_MK_FOURCC('W', 'V', 'Q', 'A'),
+                     0x00 } },
+     
+-    /*     CODEC_ID_MSRLE, */
+-    { "FFmpeg MSRLE Decoder", "Microsoft RLE", CODEC_ID_MSRLE,
++    /*     AV_CODEC_ID_MSRLE, */
++    { "FFmpeg MSRLE Decoder", "Microsoft RLE", AV_CODEC_ID_MSRLE,
+       (uint32_t[]){ BGAV_MK_FOURCC('W', 'R', 'L', 'E'),
+                BGAV_MK_FOURCC('m', 'r', 'l', 'e'),
+                BGAV_MK_FOURCC(0x1, 0x0, 0x0, 0x0),
+                0x00 } },
+ 
+-    /*     CODEC_ID_MSVIDEO1, */
+-    { "FFmpeg MSVideo 1 decoder", "Microsoft Video 1", CODEC_ID_MSVIDEO1,
++    /*     AV_CODEC_ID_MSVIDEO1, */
++    { "FFmpeg MSVideo 1 decoder", "Microsoft Video 1", AV_CODEC_ID_MSVIDEO1,
+       (uint32_t[]){ BGAV_MK_FOURCC('M', 'S', 'V', 'C'),
+                BGAV_MK_FOURCC('m', 's', 'v', 'c'),
+                BGAV_MK_FOURCC('C', 'R', 'A', 'M'),
+@@ -1473,309 +1473,309 @@
+                BGAV_MK_FOURCC('w', 'h', 'a', 'm'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_IDCIN, */
++    /*     AV_CODEC_ID_IDCIN, */
+ #if 1 // Crashes
+-    { "FFmpeg ID CIN decoder", "ID CIN", CODEC_ID_IDCIN,
++    { "FFmpeg ID CIN decoder", "ID CIN", AV_CODEC_ID_IDCIN,
+       (uint32_t[]){ BGAV_MK_FOURCC('I', 'D', 'C', 'I'),
+                0x00 } },
+ #endif
+-    /*     CODEC_ID_8BPS, */
+-    { "FFmpeg 8BPS decoder", "Quicktime Planar RGB (8BPS)", CODEC_ID_8BPS,
++    /*     AV_CODEC_ID_8BPS, */
++    { "FFmpeg 8BPS decoder", "Quicktime Planar RGB (8BPS)", AV_CODEC_ID_8BPS,
+       (uint32_t[]){ BGAV_MK_FOURCC('8', 'B', 'P', 'S'),
+                0x00 } },
+-    /*     CODEC_ID_SMC, */
+-    { "FFmpeg SMC decoder", "Apple Graphics", CODEC_ID_SMC,
++    /*     AV_CODEC_ID_SMC, */
++    { "FFmpeg SMC decoder", "Apple Graphics", AV_CODEC_ID_SMC,
+       (uint32_t[]){ BGAV_MK_FOURCC('s', 'm', 'c', ' '),
+                0x00 } },
+ 
+ 
+-    /*     CODEC_ID_FLIC, */
+-    { "FFmpeg FLI/FLC Decoder", "FLI/FLC Animation", CODEC_ID_FLIC,
++    /*     AV_CODEC_ID_FLIC, */
++    { "FFmpeg FLI/FLC Decoder", "FLI/FLC Animation", AV_CODEC_ID_FLIC,
+       (uint32_t[]){ BGAV_MK_FOURCC('F', 'L', 'I', 'C'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_TRUEMOTION1, */
+-    { "FFmpeg DUCK TrueMotion 1 decoder", "Duck TrueMotion 1", CODEC_ID_TRUEMOTION1,
++    /*     AV_CODEC_ID_TRUEMOTION1, */
++    { "FFmpeg DUCK TrueMotion 1 decoder", "Duck TrueMotion 1", AV_CODEC_ID_TRUEMOTION1,
+       (uint32_t[]){ BGAV_MK_FOURCC('D', 'U', 'C', 'K'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_VMDVIDEO, */
++    /*     AV_CODEC_ID_VMDVIDEO, */
+     { "FFmpeg Sierra VMD video decoder", "Sierra VMD video",
+-      CODEC_ID_VMDVIDEO,
++      AV_CODEC_ID_VMDVIDEO,
+       (uint32_t[]){ BGAV_MK_FOURCC('V', 'M', 'D', 'V'),
+                     0x00 } },
+     
+-    /*     CODEC_ID_MSZH, */
+-    { "FFmpeg MSZH decoder", "LCL MSZH", CODEC_ID_MSZH,
++    /*     AV_CODEC_ID_MSZH, */
++    { "FFmpeg MSZH decoder", "LCL MSZH", AV_CODEC_ID_MSZH,
+       (uint32_t[]){ BGAV_MK_FOURCC('M', 'S', 'Z', 'H'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_ZLIB, */
+-    { "FFmpeg ZLIB decoder", "LCL ZLIB", CODEC_ID_ZLIB,
++    /*     AV_CODEC_ID_ZLIB, */
++    { "FFmpeg ZLIB decoder", "LCL ZLIB", AV_CODEC_ID_ZLIB,
+       (uint32_t[]){ BGAV_MK_FOURCC('Z', 'L', 'I', 'B'),
+                0x00 } },
+-    /*     CODEC_ID_QTRLE, */
+-    { "FFmpeg QT rle Decoder", "Quicktime RLE", CODEC_ID_QTRLE,
++    /*     AV_CODEC_ID_QTRLE, */
++    { "FFmpeg QT rle Decoder", "Quicktime RLE", AV_CODEC_ID_QTRLE,
+       (uint32_t[]){ BGAV_MK_FOURCC('r', 'l', 'e', ' '),
+                0x00 } },
+ 
+-    /*     CODEC_ID_SNOW, */
+-    { "FFmpeg Snow decoder", "Snow", CODEC_ID_SNOW,
++    /*     AV_CODEC_ID_SNOW, */
++    { "FFmpeg Snow decoder", "Snow", AV_CODEC_ID_SNOW,
+       (uint32_t[]){ BGAV_MK_FOURCC('S', 'N', 'O', 'W'),
+                     0x00 } },
+     
+-    /*     CODEC_ID_TSCC, */
+-    { "FFmpeg TSCC decoder", "TechSmith Camtasia", CODEC_ID_TSCC,
++    /*     AV_CODEC_ID_TSCC, */
++    { "FFmpeg TSCC decoder", "TechSmith Camtasia", AV_CODEC_ID_TSCC,
+       (uint32_t[]){ BGAV_MK_FOURCC('T', 'S', 'C', 'C'),
+                BGAV_MK_FOURCC('t', 's', 'c', 'c'),
+                0x00 } },
+-    /*     CODEC_ID_ULTI, */
+-    { "FFmpeg ULTI decoder", "IBM Ultimotion", CODEC_ID_ULTI,
++    /*     AV_CODEC_ID_ULTI, */
++    { "FFmpeg ULTI decoder", "IBM Ultimotion", AV_CODEC_ID_ULTI,
+       (uint32_t[]){ BGAV_MK_FOURCC('U', 'L', 'T', 'I'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_QDRAW, */
+-    { "FFmpeg QDraw decoder", "Apple QuickDraw", CODEC_ID_QDRAW,
++    /*     AV_CODEC_ID_QDRAW, */
++    { "FFmpeg QDraw decoder", "Apple QuickDraw", AV_CODEC_ID_QDRAW,
+       (uint32_t[]){ BGAV_MK_FOURCC('q', 'd', 'r', 'w'),
+                0x00 } },
+-    /*     CODEC_ID_VIXL, */
+-    { "FFmpeg Video XL Decoder", "Video XL", CODEC_ID_VIXL,
++    /*     AV_CODEC_ID_VIXL, */
++    { "FFmpeg Video XL Decoder", "Video XL", AV_CODEC_ID_VIXL,
+       (uint32_t[]){ BGAV_MK_FOURCC('V', 'I', 'X', 'L'),
+                0x00 } },
+-    /*     CODEC_ID_QPEG, */
+-    { "FFmpeg QPEG decoder", "QPEG", CODEC_ID_QPEG,
++    /*     AV_CODEC_ID_QPEG, */
++    { "FFmpeg QPEG decoder", "QPEG", AV_CODEC_ID_QPEG,
+       (uint32_t[]){ BGAV_MK_FOURCC('Q', '1', '.', '0'),
+                     BGAV_MK_FOURCC('Q', '1', '.', '1'),
+                     0x00 } },
+ 
+-    /*     CODEC_ID_XVID, */
++    /*     AV_CODEC_ID_XVID, */
+ 
+-    /*     CODEC_ID_PNG, */
++    /*     AV_CODEC_ID_PNG, */
+ 
+-    /*     CODEC_ID_PPM, */
++    /*     AV_CODEC_ID_PPM, */
+ 
+-    /*     CODEC_ID_PBM, */
++    /*     AV_CODEC_ID_PBM, */
+ 
+-    /*     CODEC_ID_PGM, */
++    /*     AV_CODEC_ID_PGM, */
+ 
+-    /*     CODEC_ID_PGMYUV, */
++    /*     AV_CODEC_ID_PGMYUV, */
+ 
+-    /*     CODEC_ID_PAM, */
++    /*     AV_CODEC_ID_PAM, */
+ 
+-    /*     CODEC_ID_FFVHUFF, */
+-    { "FFmpeg FFVHUFF decoder", "FFmpeg Huffman", CODEC_ID_FFVHUFF,
++    /*     AV_CODEC_ID_FFVHUFF, */
++    { "FFmpeg FFVHUFF decoder", "FFmpeg Huffman", AV_CODEC_ID_FFVHUFF,
+       (uint32_t[]){ BGAV_MK_FOURCC('F', 'F', 'V', 'H'),
+                0x00 } },
+     
+-    /*     CODEC_ID_RV30, */
++    /*     AV_CODEC_ID_RV30, */
+ 
+-    { "FFmpeg Real video 3.0 decoder", "Real video 3.0", CODEC_ID_RV30,
++    { "FFmpeg Real video 3.0 decoder", "Real video 3.0", AV_CODEC_ID_RV30,
+       (uint32_t[]){ BGAV_MK_FOURCC('R', 'V', '3', '0'),
+                0x00 } },
+     
+-    /*     CODEC_ID_RV40, */
+-    { "FFmpeg Real video 4.0 decoder", "Real video 4.0", CODEC_ID_RV40,
++    /*     AV_CODEC_ID_RV40, */
++    { "FFmpeg Real video 4.0 decoder", "Real video 4.0", AV_CODEC_ID_RV40,
+       (uint32_t[]){ BGAV_MK_FOURCC('R', 'V', '4', '0'),
+                0x00 } },
+     
+-    /*     CODEC_ID_VC1, */
+-    { "FFmpeg VC1 decoder", "VC1", CODEC_ID_VC1,
++    /*     AV_CODEC_ID_VC1, */
++    { "FFmpeg VC1 decoder", "VC1", AV_CODEC_ID_VC1,
+       (uint32_t[]){ BGAV_MK_FOURCC('W', 'V', 'C', '1'),
+                     BGAV_MK_FOURCC('V', 'C', '-', '1'),
+                     0x00 } },
+     
+-    /*     CODEC_ID_WMV3, */
++    /*     AV_CODEC_ID_WMV3, */
+     // #ifndef HAVE_W32DLL
+     
+     // [wmv3 @ 0xb63fe128]Old WMV3 version detected, only I-frames will be decoded
+-    { "FFmpeg WMV3 decoder", "Window Media Video 9", CODEC_ID_WMV3,
++    { "FFmpeg WMV3 decoder", "Window Media Video 9", AV_CODEC_ID_WMV3,
+       (uint32_t[]){ BGAV_MK_FOURCC('W', 'M', 'V', '3'),
+                0x00 } }, 
+     // #endif
+ 
+-    /*     CODEC_ID_LOCO, */
+-    { "FFmpeg LOCO decoder", "LOCO", CODEC_ID_LOCO,
++    /*     AV_CODEC_ID_LOCO, */
++    { "FFmpeg LOCO decoder", "LOCO", AV_CODEC_ID_LOCO,
+       (uint32_t[]){ BGAV_MK_FOURCC('L', 'O', 'C', 'O'),
+                0x00 } },
+     
+-    /*     CODEC_ID_WNV1, */
+-    { "FFmpeg WNV1 decoder", "Winnow Video 1", CODEC_ID_WNV1,
++    /*     AV_CODEC_ID_WNV1, */
++    { "FFmpeg WNV1 decoder", "Winnow Video 1", AV_CODEC_ID_WNV1,
+       (uint32_t[]){ BGAV_MK_FOURCC('W', 'N', 'V', '1'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_AASC, */
+-    { "FFmpeg AASC decoder", "Autodesk Animator Studio Codec", CODEC_ID_AASC,
++    /*     AV_CODEC_ID_AASC, */
++    { "FFmpeg AASC decoder", "Autodesk Animator Studio Codec", AV_CODEC_ID_AASC,
+       (uint32_t[]){ BGAV_MK_FOURCC('A', 'A', 'S', 'C'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_INDEO2, */
+-    { "FFmpeg Inteo 2 decoder", "Intel Indeo 2", CODEC_ID_INDEO2,
++    /*     AV_CODEC_ID_INDEO2, */
++    { "FFmpeg Inteo 2 decoder", "Intel Indeo 2", AV_CODEC_ID_INDEO2,
+       (uint32_t[]){ BGAV_MK_FOURCC('R', 'T', '2', '1'),
+                     0x00 } },
+-    /*     CODEC_ID_FRAPS, */
+-    { "FFmpeg Fraps 1 decoder", "Fraps 1", CODEC_ID_FRAPS,
++    /*     AV_CODEC_ID_FRAPS, */
++    { "FFmpeg Fraps 1 decoder", "Fraps 1", AV_CODEC_ID_FRAPS,
+       (uint32_t[]){ BGAV_MK_FOURCC('F', 'P', 'S', '1'),
+                     0x00 } },
+ 
+-    /*     CODEC_ID_TRUEMOTION2, */
+-    { "FFmpeg DUCK TrueMotion 2 decoder", "Duck TrueMotion 2", CODEC_ID_TRUEMOTION2,
++    /*     AV_CODEC_ID_TRUEMOTION2, */
++    { "FFmpeg DUCK TrueMotion 2 decoder", "Duck TrueMotion 2", AV_CODEC_ID_TRUEMOTION2,
+       (uint32_t[]){ BGAV_MK_FOURCC('T', 'M', '2', '0'),
+                0x00 } },
+-    /*     CODEC_ID_BMP, */
+-    /*     CODEC_ID_CSCD, */
+-    { "FFmpeg CSCD decoder", "CamStudio Screen Codec", CODEC_ID_CSCD,
++    /*     AV_CODEC_ID_BMP, */
++    /*     AV_CODEC_ID_CSCD, */
++    { "FFmpeg CSCD decoder", "CamStudio Screen Codec", AV_CODEC_ID_CSCD,
+       (uint32_t[]){ BGAV_MK_FOURCC('C', 'S', 'C', 'D'),
+                0x00 } },
+     
+-    /*     CODEC_ID_MMVIDEO, */
+-    { "FFmpeg MM video decoder", "American Laser Games MM", CODEC_ID_MMVIDEO,
++    /*     AV_CODEC_ID_MMVIDEO, */
++    { "FFmpeg MM video decoder", "American Laser Games MM", AV_CODEC_ID_MMVIDEO,
+       (uint32_t[]){ BGAV_MK_FOURCC('M', 'M', 'V', 'D'),
+                     0x00 } },
+-    /*     CODEC_ID_ZMBV, */
+-    { "FFmpeg ZMBV decoder", "Zip Motion Blocks Video", CODEC_ID_ZMBV,
++    /*     AV_CODEC_ID_ZMBV, */
++    { "FFmpeg ZMBV decoder", "Zip Motion Blocks Video", AV_CODEC_ID_ZMBV,
+       (uint32_t[]){ BGAV_MK_FOURCC('Z', 'M', 'B', 'V'),
+                0x00 } },
+ 
+-    /*     CODEC_ID_AVS, */
+-    { "FFmpeg AVS Video Decoder", "AVS Video", CODEC_ID_AVS,
++    /*     AV_CODEC_ID_AVS, */
++    { "FFmpeg AVS Video Decoder", "AVS Video", AV_CODEC_ID_AVS,
+       (uint32_t[]){ BGAV_MK_FOURCC('A', 'V', 'S', ' '),
+                     0x00 } },
+-    /*     CODEC_ID_SMACKVIDEO, */
+-    { "FFmpeg Smacker Video Decoder", "Smacker Video", CODEC_ID_SMACKVIDEO,
++    /*     AV_CODEC_ID_SMACKVIDEO, */
++    { "FFmpeg Smacker Video Decoder", "Smacker Video", AV_CODEC_ID_SMACKVIDEO,
+       (uint32_t[]){ BGAV_MK_FOURCC('S', 'M', 'K', '2'),
+                     BGAV_MK_FOURCC('S', 'M', 'K', '4'),
+                     0x00 } },
+-    /*     CODEC_ID_NUV, */
+-    { "FFmpeg NuppelVideo decoder", "NuppelVideo (rtjpeg)", CODEC_ID_NUV,
++    /*     AV_CODEC_ID_NUV, */
++    { "FFmpeg NuppelVideo decoder", "NuppelVideo (rtjpeg)", AV_CODEC_ID_NUV,
+       (uint32_t[]){ BGAV_MK_FOURCC('R', 'J', 'P', 'G'),
+                     BGAV_MK_FOURCC('N', 'U', 'V', ' '),
+                0x00 } },
+-    /*     CODEC_ID_KMVC, */
+-    { "FFmpeg KMVC decoder", "Karl Morton's video codec", CODEC_ID_KMVC,
++    /*     AV_CODEC_ID_KMVC, */
++    { "FFmpeg KMVC decoder", "Karl Morton's video codec", AV_CODEC_ID_KMVC,
+       (uint32_t[]){ BGAV_MK_FOURCC('K', 'M', 'V', 'C'),
+                0x00 } },
+-    /*     CODEC_ID_FLASHSV, */
+-    { "FFmpeg Flash screen video decoder", "Flash Screen Video", CODEC_ID_FLASHSV,
++    /*     AV_CODEC_ID_FLASHSV, */
++    { "FFmpeg Flash screen video decoder", "Flash Screen Video", AV_CODEC_ID_FLASHSV,
+       (uint32_t[]){ BGAV_MK_FOURCC('F', 'L', 'V', 'S'),
+                     0x00 } },
+-    /*     CODEC_ID_CAVS, */
++    /*     AV_CODEC_ID_CAVS, */
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(11<<8)+0)
+-    { "FFmpeg Chinese AVS decoder", "Chinese AVS", CODEC_ID_CAVS,
++    { "FFmpeg Chinese AVS decoder", "Chinese AVS", AV_CODEC_ID_CAVS,
+       (uint32_t[]){ BGAV_MK_FOURCC('C', 'A', 'V', 'S'),
+                     0x00 } },
+ #endif
+-    /*     CODEC_ID_JPEG2000, */
++    /*     AV_CODEC_ID_JPEG2000, */
+ 
+-    /*     CODEC_ID_VMNC, */
++    /*     AV_CODEC_ID_VMNC, */
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(13<<8)+0)
+-    { "FFmpeg VMware video decoder", "VMware video", CODEC_ID_VMNC,
++    { "FFmpeg VMware video decoder", "VMware video", AV_CODEC_ID_VMNC,
+       (uint32_t[]){ BGAV_MK_FOURCC('V', 'M', 'n', 'c'),
+                     0x00 } },
+ #endif      
+-    /*     CODEC_ID_VP5, */
++    /*     AV_CODEC_ID_VP5, */
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(14<<8)+0)    
+-    { "FFmpeg VP5 decoder", "On2 VP5", CODEC_ID_VP5,
++    { "FFmpeg VP5 decoder", "On2 VP5", AV_CODEC_ID_VP5,
+       (uint32_t[]){ BGAV_MK_FOURCC('V', 'P', '5', '0'),
+                     0x00 } },
+ #endif
+-    /*     CODEC_ID_VP6, */
++    /*     AV_CODEC_ID_VP6, */
+ 
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(14<<8)+0) 
+-    { "FFmpeg VP6.2 decoder", "On2 VP6.2", CODEC_ID_VP6,
++    { "FFmpeg VP6.2 decoder", "On2 VP6.2", AV_CODEC_ID_VP6,
+       (uint32_t[]){ BGAV_MK_FOURCC('V', 'P', '6', '2'),
+                     0x00 } },
+ #endif
+ 
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(27<<8)+0)
+-    { "FFmpeg VP6.0 decoder", "On2 VP6.0", CODEC_ID_VP6,
++    { "FFmpeg VP6.0 decoder", "On2 VP6.0", AV_CODEC_ID_VP6,
+       (uint32_t[]){ BGAV_MK_FOURCC('V', 'P', '6', '0'),
+                     0x00 } },
+-    { "FFmpeg VP6.1 decoder", "On2 VP6.1", CODEC_ID_VP6,
++    { "FFmpeg VP6.1 decoder", "On2 VP6.1", AV_CODEC_ID_VP6,
+       (uint32_t[]){ BGAV_MK_FOURCC('V', 'P', '6', '1'),
+                     0x00 } },
+-    { "FFmpeg VP6.2 decoder (flash variant)", "On2 VP6.2 (flash variant)", CODEC_ID_VP6F,
++    { "FFmpeg VP6.2 decoder (flash variant)", "On2 VP6.2 (flash variant)", AV_CODEC_ID_VP6F,
+       (uint32_t[]){ BGAV_MK_FOURCC('V', 'P', '6', 'F'),
+                     0x00 } },
+ #endif
+-    /*     CODEC_ID_TARGA, */
+-    /*     CODEC_ID_DSICINVIDEO, */
++    /*     AV_CODEC_ID_TARGA, */
++    /*     AV_CODEC_ID_DSICINVIDEO, */
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(18<<8)+0)
+-    { "FFmpeg Delphine CIN video decoder", "Delphine CIN Video", CODEC_ID_DSICINVIDEO,
++    { "FFmpeg Delphine CIN video decoder", "Delphine CIN Video", AV_CODEC_ID_DSICINVIDEO,
+       (uint32_t[]){ BGAV_MK_FOURCC('d', 'c', 'i', 'n'),
+                0x00 } },
+ #endif      
+-    /*     CODEC_ID_TIERTEXSEQVIDEO, */
++    /*     AV_CODEC_ID_TIERTEXSEQVIDEO, */
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(19<<8)+0)
+-    { "FFmpeg Tiertex Video Decoder", "Tiertex Video", CODEC_ID_TIERTEXSEQVIDEO,
++    { "FFmpeg Tiertex Video Decoder", "Tiertex Video", AV_CODEC_ID_TIERTEXSEQVIDEO,
+       (uint32_t[]){ BGAV_MK_FOURCC('T', 'I', 'T', 'X'),
+                     0x00 } },
+ #endif
+-    /*     CODEC_ID_TIFF, */
+-    /*     CODEC_ID_GIF, */
++    /*     AV_CODEC_ID_TIFF, */
++    /*     AV_CODEC_ID_GIF, */
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(21<<8)+0)
+-    { "FFmpeg GIF Video Decoder", "GIF", CODEC_ID_GIF,
++    { "FFmpeg GIF Video Decoder", "GIF", AV_CODEC_ID_GIF,
+       (uint32_t[]){ BGAV_MK_FOURCC('g', 'i', 'f', ' '),
+                     0x00 } },
+ #endif
+-    /*     CODEC_ID_FFH264, */
+-    /*     CODEC_ID_DXA, */
++    /*     AV_CODEC_ID_FFH264, */
++    /*     AV_CODEC_ID_DXA, */
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(39<<8)+0)
+-    { "FFmpeg DXA decoder", "DXA", CODEC_ID_DXA,
++    { "FFmpeg DXA decoder", "DXA", AV_CODEC_ID_DXA,
+       (uint32_t[]){ BGAV_MK_FOURCC('D', 'X', 'A', ' '),
+                     0x00 } },
+ #endif
+-    /*     CODEC_ID_DNXHD, */
++    /*     AV_CODEC_ID_DNXHD, */
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(40<<8)+0)
+-    { "FFmpeg DNxHD Video decoder", "DNxHD", CODEC_ID_DNXHD,
++    { "FFmpeg DNxHD Video decoder", "DNxHD", AV_CODEC_ID_DNXHD,
+       (uint32_t[]){ BGAV_MK_FOURCC('A', 'V', 'd', 'n'),
+                0x00 } },
+ #endif
+-    /*     CODEC_ID_THP, */
++    /*     AV_CODEC_ID_THP, */
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(40<<8)+4)
+-    { "FFmpeg THP Video decoder", "THP Video", CODEC_ID_THP,
++    { "FFmpeg THP Video decoder", "THP Video", AV_CODEC_ID_THP,
+       (uint32_t[]){ BGAV_MK_FOURCC('T', 'H', 'P', 'V'),
+                0x00 } },
+ #endif
+-    /*     CODEC_ID_SGI, */
+-    /*     CODEC_ID_C93, */
++    /*     AV_CODEC_ID_SGI, */
++    /*     AV_CODEC_ID_C93, */
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(40<<8)+3)
+-    { "FFmpeg C93 decoder", "C93", CODEC_ID_C93,
++    { "FFmpeg C93 decoder", "C93", AV_CODEC_ID_C93,
+       (uint32_t[]){ BGAV_MK_FOURCC('C', '9', '3', 'V'),
+                     0x00 } },
+ #endif
+-    /*     CODEC_ID_BETHSOFTVID, */
++    /*     AV_CODEC_ID_BETHSOFTVID, */
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(40<<8)+3)
+     { "FFmpeg Bethsoft VID decoder", "Bethsoft VID",
+-      CODEC_ID_BETHSOFTVID,
++      AV_CODEC_ID_BETHSOFTVID,
+       (uint32_t[]){ BGAV_MK_FOURCC('B','S','D','V'), 0x00 } },
+ #endif
+ 
+-    /*     CODEC_ID_PTX, */
++    /*     AV_CODEC_ID_PTX, */
+     
+-    /*     CODEC_ID_TXD, */
++    /*     AV_CODEC_ID_TXD, */
+     
+-    /*     CODEC_ID_VP6A, */
++    /*     AV_CODEC_ID_VP6A, */
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(45<<8)+0)
+-    { "FFmpeg VP6 yuva decoder", "On2 VP6.0 with alpha", CODEC_ID_VP6A,
++    { "FFmpeg VP6 yuva decoder", "On2 VP6.0 with alpha", AV_CODEC_ID_VP6A,
+       (uint32_t[]){ BGAV_MK_FOURCC('V', 'P', '6', 'A'),
+                     0x00 } },
+ #endif
+-    /*     CODEC_ID_AMV, */
+-    /*     CODEC_ID_VB, */
++    /*     AV_CODEC_ID_AMV, */
++    /*     AV_CODEC_ID_VB, */
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(47<<8)+0)
+     { "FFmpeg Beam Software VB decoder", "Beam Software VB",
+-      CODEC_ID_VB,
++      AV_CODEC_ID_VB,
+       (uint32_t[]){ BGAV_MK_FOURCC('V','B','V','1'), 0x00 } },
+ #endif
+ 
+ #if LIBAVCODEC_BUILD >= ((52<<16)+(53<<8)+0) 
+-    { "FFmpeg Indeo 5 decoder", "Indeo 5", CODEC_ID_INDEO5,
++    { "FFmpeg Indeo 5 decoder", "Indeo 5", AV_CODEC_ID_INDEO5,
+       (uint32_t[]){ BGAV_MK_FOURCC('I', 'V', '5', '0'),
+                     0x00 } },
+ #endif
+ 
+ #if LIBAVCODEC_BUILD >= ((52<<16)+(78<<8)+0) 
+-    { "FFmpeg VP8 decoder", "VP8", CODEC_ID_VP8,
++    { "FFmpeg VP8 decoder", "VP8", AV_CODEC_ID_VP8,
+       (uint32_t[]){ BGAV_MK_FOURCC('V', 'P', '8', '0'),
+                     0x00 } },
+ #endif
+@@ -2113,50 +2113,50 @@
+ 
+ static const struct
+   {
+-  enum PixelFormat  ffmpeg_csp;
++  enum AVPixelFormat  ffmpeg_csp;
+   gavl_pixelformat_t gavl_csp;
+   } pixelformats[] =
+   {
+-    { PIX_FMT_YUV420P,       GAVL_YUV_420_P },  ///< Planar YUV 4:2:0 (1 Cr & Cb sample per 2x2 Y samples)
++    { AV_PIX_FMT_YUV420P,       GAVL_YUV_420_P },  ///< Planar YUV 4:2:0 (1 Cr & Cb sample per 2x2 Y samples)
+ #if LIBAVUTIL_VERSION_INT < (50<<16)
+-    { PIX_FMT_YUV422,        GAVL_YUY2      },
++    { AV_PIX_FMT_YUV422,        GAVL_YUY2      },
+ #else
+-    { PIX_FMT_YUYV422,       GAVL_YUY2      },
++    { AV_PIX_FMT_YUYV422,       GAVL_YUY2      },
+ #endif
+-    { PIX_FMT_RGB24,         GAVL_RGB_24    },  ///< Packed pixel, 3 bytes per pixel, RGBRGB...
+-    { PIX_FMT_BGR24,         GAVL_BGR_24    },  ///< Packed pixel, 3 bytes per pixel, BGRBGR...
+-    { PIX_FMT_YUV422P,       GAVL_YUV_422_P },  ///< Planar YUV 4:2:2 (1 Cr & Cb sample per 2x1 Y samples)
+-    { PIX_FMT_YUV444P,       GAVL_YUV_444_P }, ///< Planar YUV 4:4:4 (1 Cr & Cb sample per 1x1 Y samples)
++    { AV_PIX_FMT_RGB24,         GAVL_RGB_24    },  ///< Packed pixel, 3 bytes per pixel, RGBRGB...
++    { AV_PIX_FMT_BGR24,         GAVL_BGR_24    },  ///< Packed pixel, 3 bytes per pixel, BGRBGR...
++    { AV_PIX_FMT_YUV422P,       GAVL_YUV_422_P },  ///< Planar YUV 4:2:2 (1 Cr & Cb sample per 2x1 Y samples)
++    { AV_PIX_FMT_YUV444P,       GAVL_YUV_444_P }, ///< Planar YUV 4:4:4 (1 Cr & Cb sample per 1x1 Y samples)
+ #if LIBAVUTIL_VERSION_INT < (50<<16)
+-    { PIX_FMT_RGBA32,        GAVL_RGBA_32   },  ///< Packed pixel, 4 bytes per pixel, BGRABGRA..., stored in cpu endianness
++    { AV_PIX_FMT_RGBA32,        GAVL_RGBA_32   },  ///< Packed pixel, 4 bytes per pixel, BGRABGRA..., stored in cpu endianness
+ #else
+-    { PIX_FMT_RGB32,         GAVL_RGBA_32   },  ///< Packed pixel, 4 bytes per pixel, BGRABGRA..., stored in cpu endianness
++    { AV_PIX_FMT_RGB32,         GAVL_RGBA_32   },  ///< Packed pixel, 4 bytes per pixel, BGRABGRA..., stored in cpu endianness
+ #endif
+-    { PIX_FMT_YUV410P,       GAVL_YUV_410_P }, ///< Planar YUV 4:1:0 (1 Cr & Cb sample per 4x4 Y samples)
+-    { PIX_FMT_YUV411P,       GAVL_YUV_411_P }, ///< Planar YUV 4:1:1 (1 Cr & Cb sample per 4x1 Y samples)
+-    { PIX_FMT_RGB565,        GAVL_RGB_16 }, ///< always stored in cpu endianness
+-    { PIX_FMT_RGB555,        GAVL_RGB_15 }, ///< always stored in cpu endianness, most significant bit to 1
+-    { PIX_FMT_GRAY8,         GAVL_PIXELFORMAT_NONE },
+-    { PIX_FMT_MONOWHITE,     GAVL_PIXELFORMAT_NONE }, ///< 0 is white
+-    { PIX_FMT_MONOBLACK,     GAVL_PIXELFORMAT_NONE }, ///< 0 is black
+-    // { PIX_FMT_PAL8,          GAVL_RGB_24     }, ///< 8 bit with RGBA palette
+-    { PIX_FMT_YUVJ420P,      GAVL_YUVJ_420_P }, ///< Planar YUV 4:2:0 full scale (jpeg)
+-    { PIX_FMT_YUVJ422P,      GAVL_YUVJ_422_P }, ///< Planar YUV 4:2:2 full scale (jpeg)
+-    { PIX_FMT_YUVJ444P,      GAVL_YUVJ_444_P }, ///< Planar YUV 4:4:4 full scale (jpeg)
+-    { PIX_FMT_XVMC_MPEG2_MC, GAVL_PIXELFORMAT_NONE }, ///< XVideo Motion Acceleration via common packet passing(xvmc_render.h)
+-    { PIX_FMT_XVMC_MPEG2_IDCT, GAVL_PIXELFORMAT_NONE },
++    { AV_PIX_FMT_YUV410P,       GAVL_YUV_410_P }, ///< Planar YUV 4:1:0 (1 Cr & Cb sample per 4x4 Y samples)
++    { AV_PIX_FMT_YUV411P,       GAVL_YUV_411_P }, ///< Planar YUV 4:1:1 (1 Cr & Cb sample per 4x1 Y samples)
++    { AV_PIX_FMT_RGB565,        GAVL_RGB_16 }, ///< always stored in cpu endianness
++    { AV_PIX_FMT_RGB555,        GAVL_RGB_15 }, ///< always stored in cpu endianness, most significant bit to 1
++    { AV_PIX_FMT_GRAY8,         GAVL_PIXELFORMAT_NONE },
++    { AV_PIX_FMT_MONOWHITE,     GAVL_PIXELFORMAT_NONE }, ///< 0 is white
++    { AV_PIX_FMT_MONOBLACK,     GAVL_PIXELFORMAT_NONE }, ///< 0 is black
++    // { AV_PIX_FMT_PAL8,          GAVL_RGB_24     }, ///< 8 bit with RGBA palette
++    { AV_PIX_FMT_YUVJ420P,      GAVL_YUVJ_420_P }, ///< Planar YUV 4:2:0 full scale (jpeg)
++    { AV_PIX_FMT_YUVJ422P,      GAVL_YUVJ_422_P }, ///< Planar YUV 4:2:2 full scale (jpeg)
++    { AV_PIX_FMT_YUVJ444P,      GAVL_YUVJ_444_P }, ///< Planar YUV 4:4:4 full scale (jpeg)
++    { AV_PIX_FMT_XVMC_MPEG2_MC, GAVL_PIXELFORMAT_NONE }, ///< XVideo Motion Acceleration via common packet passing(xvmc_render.h)
++    { AV_PIX_FMT_XVMC_MPEG2_IDCT, GAVL_PIXELFORMAT_NONE },
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(45<<8)+0)
+-    { PIX_FMT_YUVA420P,      GAVL_YUVA_32 },
++    { AV_PIX_FMT_YUVA420P,      GAVL_YUVA_32 },
+ #endif
+-    { PIX_FMT_NB, GAVL_PIXELFORMAT_NONE }
++    { AV_PIX_FMT_NB, GAVL_PIXELFORMAT_NONE }
+ };
+ 
+ 
+-static gavl_pixelformat_t get_pixelformat(enum PixelFormat p,
++static gavl_pixelformat_t get_pixelformat(enum AVPixelFormat p,
+                                           gavl_pixelformat_t pixelformat)
+   {
+   int i;
+-  if(p == PIX_FMT_PAL8)
++  if(p == AV_PIX_FMT_PAL8)
+     {
+     if(pixelformat == GAVL_RGBA_32)
+       return GAVL_RGBA_32;
+@@ -2179,7 +2179,7 @@
+   format->pixelformat =
+     get_pixelformat(ctx->pix_fmt, format->pixelformat);
+   
+-  if(ctx->codec_id == CODEC_ID_DVVIDEO)
++  if(ctx->codec_id == AV_CODEC_ID_DVVIDEO)
+     {
+     if(format->pixelformat == GAVL_YUV_420_P)
+       format->chroma_placement = GAVL_CHROMA_PLACEMENT_DVPAL;
+@@ -2227,8 +2227,8 @@
+       format->pixel_height = ctx->width;
+       format->image_width = ctx->width;
+       }
+-    if(((ctx->codec_id == CODEC_ID_MPEG4) ||
+-        (ctx->codec_id == CODEC_ID_H264)) &&
++    if(((ctx->codec_id == AV_CODEC_ID_MPEG4) ||
++        (ctx->codec_id == AV_CODEC_ID_H264)) &&
+        (format->pixelformat == GAVL_YUV_420_P))
+       format->chroma_placement = GAVL_CHROMA_PLACEMENT_MPEG2;
+     }
+@@ -2255,13 +2255,13 @@
+     {
+     switch(priv->info->ffmpeg_id)
+       {
+-      case CODEC_ID_MPEG4:
+-      case CODEC_ID_MSMPEG4V1:
+-      case CODEC_ID_MSMPEG4V2:
+-      case CODEC_ID_MSMPEG4V3:
+-      case CODEC_ID_WMV1:
+-      case CODEC_ID_WMV2:
+-      case CODEC_ID_WMV3:
++      case AV_CODEC_ID_MPEG4:
++      case AV_CODEC_ID_MSMPEG4V1:
++      case AV_CODEC_ID_MSMPEG4V2:
++      case AV_CODEC_ID_MSMPEG4V3:
++      case AV_CODEC_ID_WMV1:
++      case AV_CODEC_ID_WMV2:
++      case AV_CODEC_ID_WMV3:
+         priv->do_pp = 1;
+         accel_flags = gavl_accel_supported();
+ 
+@@ -2315,7 +2315,7 @@
+   
+   ffmpeg_video_priv * priv;
+   priv = s->data.video.decoder->priv;
+-  if(priv->ctx->pix_fmt == PIX_FMT_PAL8)
++  if(priv->ctx->pix_fmt == AV_PIX_FMT_PAL8)
+     {
+     if(s->data.video.format.pixelformat == GAVL_RGBA_32)
+       pal8_to_rgba32(f, priv->frame,
+@@ -2337,9 +2337,9 @@
+     }
+ #endif
+ #if LIBAVUTIL_VERSION_INT < (50<<16)
+-  else if(priv->ctx->pix_fmt == PIX_FMT_RGBA32)
++  else if(priv->ctx->pix_fmt == AV_PIX_FMT_RGBA32)
+ #else
+-  else if(priv->ctx->pix_fmt == PIX_FMT_RGB32)
++  else if(priv->ctx->pix_fmt == AV_PIX_FMT_RGB32)
+ #endif
+     {
+     rgba32_to_rgba32(f, priv->frame,
+@@ -2347,7 +2347,7 @@
+                      s->data.video.format.image_height, !!(priv->flags & FLIP_Y));
+     }
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(45<<8)+0)
+-  else if(priv->ctx->pix_fmt == PIX_FMT_YUVA420P)
++  else if(priv->ctx->pix_fmt == AV_PIX_FMT_YUVA420P)
+     {
+     yuva420_to_yuva32(f, priv->frame,
+                       s->data.video.format.image_width,
