@@ -1,0 +1,90 @@
+--- gmerlin-avdecoder-1.2.0/lib/audio_ffmpeg.c~	2018-04-29 11:01:03.000000000 +0200
++++ gmerlin-avdecoder-1.2.0/lib/audio_ffmpeg.c	2018-04-29 11:02:16.192276294 +0200
+@@ -189,7 +189,7 @@
+     bgav_dprintf("Got packet\n");
+     bgav_packet_dump(p);
+ #endif
+-    bgav_bytebuffer_append(&priv->buf, p, FF_INPUT_BUFFER_PADDING_SIZE);
++    bgav_bytebuffer_append(&priv->buf, p, AV_INPUT_BUFFER_PADDING_SIZE);
+     bgav_stream_done_packet_read(s, p);
+     }
+   return 1;
+@@ -334,7 +334,7 @@
+     {
+     if(!fill_buffer(s))
+       {
+-      if(!(priv->ctx->codec->capabilities & CODEC_CAP_DELAY))
++      if(!(priv->ctx->codec->capabilities & AV_CODEC_CAP_DELAY))
+         return 0;
+       }
+       
+@@ -373,7 +373,7 @@
+ 
+     /* Only codecs with delay are allowed to eat
+        packets without outputting audio */
+-    if(!(priv->ctx->codec->capabilities & CODEC_CAP_DELAY))
++    if(!(priv->ctx->codec->capabilities & AV_CODEC_CAP_DELAY))
+       return 0;
+     }
+   
+@@ -451,7 +451,7 @@
+   if(s->ext_size)
+     {
+     priv->ext_data = calloc(1, s->ext_size +
+-                            FF_INPUT_BUFFER_PADDING_SIZE);
++                            AV_INPUT_BUFFER_PADDING_SIZE);
+     memcpy(priv->ext_data, s->ext_data, s->ext_size);
+     
+     priv->ctx->extradata = priv->ext_data;
+--- gmerlin-avdecoder-1.2.0/lib/video_ffmpeg.c~	2018-04-29 11:01:03.000000000 +0200
++++ gmerlin-avdecoder-1.2.0/lib/video_ffmpeg.c	2018-04-29 11:07:18.996633710 +0200
+@@ -121,7 +121,7 @@
+ 
+   /* Real video ugliness */
+ 
+-  uint32_t rv_extradata[2+FF_INPUT_BUFFER_PADDING_SIZE/4];
++  uint32_t rv_extradata[2+AV_INPUT_BUFFER_PADDING_SIZE/4];
+ 
+ #if LIBAVCODEC_VERSION_MAJOR < 54
+   AVPaletteControl palette;
+@@ -884,18 +884,18 @@
+    *  For streams, where the packets are not aligned with frames,
+    *  we need an AVParser
+    */
+-  priv->ctx->flags &= ~CODEC_FLAG_TRUNCATED;
++  priv->ctx->flags &= ~AV_CODEC_FLAG_TRUNCATED;
+   //  priv->ctx->flags |=  CODEC_FLAG_BITEXACT;
+ 
+   /* Check if there might be B-frames */
+-  if(codec->capabilities & CODEC_CAP_DELAY)
++  if(codec->capabilities & AV_CODEC_CAP_DELAY)
+     priv->flags |= HAS_DELAY;
+   
+   priv->ctx->opaque = s;
+   
+   if(s->ext_data)
+     {
+-    priv->extradata = calloc(s->ext_size + FF_INPUT_BUFFER_PADDING_SIZE, 1);
++    priv->extradata = calloc(s->ext_size + AV_INPUT_BUFFER_PADDING_SIZE, 1);
+     memcpy(priv->extradata, s->ext_data, s->ext_size);
+     priv->extradata_size = s->ext_size;
+ 
+@@ -1816,7 +1816,7 @@
+       codecs[real_num_codecs].info = &codec_infos[i];
+       codecs[real_num_codecs].decoder.name = codecs[real_num_codecs].info->decoder_name;
+       
+-      if(c->capabilities & CODEC_CAP_DELAY) 
++      if(c->capabilities & AV_CODEC_CAP_DELAY) 
+         {
+         codecs[real_num_codecs].decoder.flags |= VCODEC_FLAG_DELAY;
+         codecs[real_num_codecs].decoder.skipto = skipto_ffmpeg;
+@@ -2143,8 +2143,7 @@
+     { AV_PIX_FMT_YUVJ420P,      GAVL_YUVJ_420_P }, ///< Planar YUV 4:2:0 full scale (jpeg)
+     { AV_PIX_FMT_YUVJ422P,      GAVL_YUVJ_422_P }, ///< Planar YUV 4:2:2 full scale (jpeg)
+     { AV_PIX_FMT_YUVJ444P,      GAVL_YUVJ_444_P }, ///< Planar YUV 4:4:4 full scale (jpeg)
+-    { AV_PIX_FMT_XVMC_MPEG2_MC, GAVL_PIXELFORMAT_NONE }, ///< XVideo Motion Acceleration via common packet passing(xvmc_render.h)
+-    { AV_PIX_FMT_XVMC_MPEG2_IDCT, GAVL_PIXELFORMAT_NONE },
++    { AV_PIX_FMT_XVMC,          GAVL_PIXELFORMAT_NONE }, ///< XVideo Motion Acceleration via common packet passing(xvmc_render.h)
+ #if LIBAVCODEC_BUILD >= ((51<<16)+(45<<8)+0)
+     { AV_PIX_FMT_YUVA420P,      GAVL_YUVA_32 },
+ #endif

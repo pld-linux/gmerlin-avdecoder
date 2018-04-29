@@ -9,7 +9,7 @@ Summary:	Multiformat media decoding library
 Summary(pl.UTF-8):	Biblioteka dekodująca wiele formatów multimedialnych
 Name:		gmerlin-avdecoder
 Version:	1.2.0
-Release:	9
+Release:	10
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://downloads.sourceforge.net/gmerlin/%{name}-%{version}.tar.gz
@@ -20,6 +20,7 @@ Patch2:		%{name}-link.patch
 Patch3:		%{name}-am.patch
 Patch4:		%{name}-ffmpeg2.patch
 Patch5:		ffmpeg3.patch
+Patch6:		ffmpeg4.patch
 URL:		http://gmerlin.sourceforge.net/avdec_frame.html
 BuildRequires:	a52dec-libs-devel >= 0.7.4
 BuildRequires:	autoconf >= 2.50
@@ -164,6 +165,7 @@ Wtyczki avdec dla biblioteki Gmerlin.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 %{__libtoolize}
